@@ -33,5 +33,42 @@ class UserController extends BaseController {
     public function postProfile()
     {
         //save profile
+        $user = Auth::user();
+        if($password = Input::get('password')) {
+            $user->password = $password;
+        }
+        if($firstName = Input::get('first_name')) {
+            $user->first_name = $firstName;
+        }
+        if($lastName = Input::get('last_name')) {
+            $user->last_name = $lastName;
+        }
+        $user->save();
+    }
+
+    public function getRegister()
+    {
+        return View::make('register');
+    }
+
+    public function postRegister()
+    {
+        try
+        {
+            // Let's register a user.
+            $user = Sentry::register(Input::all(), true);
+        }
+        catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+        {
+            echo 'Login field is required.';
+        }
+        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            echo 'Password field is required.';
+        }
+        catch (Cartalyst\Sentry\Users\UserExistsException $e)
+        {
+            echo 'User with this login already exists.';
+        }
     }
 }
