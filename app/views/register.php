@@ -83,43 +83,56 @@
         <h1>Kuafu</h1>
         <h3>Real Time Chat</h3>
       </header>
-      
-      <h4>Register</h4>
-      <form>
-        <div>
-          <label for="user">User</label>
-          <input type="text" placeholder="Enter User Name" id="user" name="user" class="user" />
-        </div>
-				
-				<div>
-          <label for="email">Email</label>
-          <input type="email" placeholder="super@cool.com" id="pwd" name="pwd" class="pwd" />
-        </div>
-				
-				<div>
-          <label for="confirmEmail">Confirm Email</label>
-          <input type="email" id="confirmEmaiil" name="confirmEmail" class="confirm-email" />
-        </div>
-				
-        <div>
-          <label for="password">Password</label>
-          <input type="password" placeholder="Password" id="pwd" name="pwd" class="pwd" />
-        </div>
-        
-        <div>
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPwd" name="confirmPwd" class="confirm-pwd" />
-        </div>
-        
-        <div>
-          <button type="submit" class="btn">Let's Go!</button> 
-        </div>
 
-      </form>
+      <?php
+        if (Session::has('success')) {
 
-			<div class="sign-in">
-				Already have an account? <a href="<?php echo url('user/login');?>" class="sign-in">Sign in</a>
-			</div>
+      ?>
+            <p>
+                <b>Registeration is successfull. Click on to the activation link that sent to your email.</b>
+            </p>
+      <?php
+        } else {
+            ?>
+            <h4>Register</h4>
+            <form action="<?php echo url('postRegister'); ?>" method="post">
+                <div>
+                    <label for="user">User</label>
+                    <input type="text" placeholder="Enter User Name" id="username" name="username" class="user"/>
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="super@cool.com" id="email" name="email" class="email"/>
+                </div>
+
+                <div>
+                    <label for="confirmEmail">Confirm Email</label>
+                    <input type="email" id="confirmEmail" name="confirmEmail" class="confirm-email"/>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" id="password" name="password" class="pwd"/>
+                </div>
+
+                <div>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="confirm-pwd"/>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn">Let's Go!</button>
+                </div>
+
+            </form>
+
+            <div class="sign-in">
+                Already have an account? <a href="<?php echo url('user/login'); ?>" class="sign-in">Sign in</a>
+            </div>
+        <?php
+        }
+      ?>
 			
     </div>
   </div>

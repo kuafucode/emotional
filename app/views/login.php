@@ -87,7 +87,7 @@
       </header>
       
       <h4>Sign in</h4>
-      <form action="<?php echo url('user/login');?>" method="post">
+      <form action="<?php echo url('postLogin');?>" method="post">
         <div>
           <label for="user">User</label>
           <input type="text" placeholder="Enter User Name" id="user" name="user" class="user" />
@@ -101,6 +101,24 @@
         </div>
         
       </form>
+
+        <?php
+            if($errors) {
+                echo $errors->first('login');
+                if($errors->has('activation')) {
+                    echo "User is not activated<br/><br/>";
+                    echo "Resend activation mail.";
+                } else if($errors->has('usernotfound')) {
+                    echo "User is not found<br/><br/>";
+        ?>
+                    <p>
+                        <b>Don't have an account?</b>
+                        <a href="register.php">Create one to get started</a>
+                    </p>
+        <?php
+                }
+            }
+        ?>
     </div>
   </div>
 </body>

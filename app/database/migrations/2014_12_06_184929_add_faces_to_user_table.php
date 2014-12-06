@@ -19,6 +19,7 @@ class AddFacesToUserTable extends Migration {
             $table->string('negative_face');
             $table->string('neutral_face');
             $table->string('languages');
+
 		});
 	}
 

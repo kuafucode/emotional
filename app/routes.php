@@ -15,13 +15,20 @@ Route::get('/', function()
 {
 	return View::make('landing');
 });
-Route::controller('user', 'UserController');
+
 Route::get('/login', function()
 {
     return View::make('login');
 });
 
-Route::get('/login.php', function()
+Route::get('/register', function()
 {
-    return View::make('login');
+    return View::make('register');
 });
+
+Route::controller('user', 'UserController');
+
+Route::get('login', 'UserController@getLogin');
+Route::post('postLogin', 'UserController@postLogin');
+Route::post('logout',"UserController@getLogout");
+Route::post('postRegister', 'UserController@postRegister');
