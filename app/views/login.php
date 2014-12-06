@@ -82,8 +82,10 @@
 	<div id="container">
     <div class="mod">
       <header>
-        <h1>Kuafu</h1>
-        <h3>Real Time Chat</h3>
+        <a href="<?php echo url('../');?>">
+					<h1>Kuafu</h1>
+					<h3>Real Time Chat</h3>
+				</a>
       </header>
       
       <h4>Sign in</h4>

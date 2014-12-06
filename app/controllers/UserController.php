@@ -106,14 +106,15 @@ class UserController extends BaseController {
         try
         {
             $credentials = array(
-                'username' => Input::get('username'),
+                'first_name' => Input::get('first_name'),
+                'last_name' => Input::get('last_name'),
                 'email' => Input::get('email'),
                 'password' => Input::get('password'),
             );
             $user = Sentry::register($credentials, true);
 
             if ($user) {
-                return Redirect::to('register')->withInput()->with('success', 'Group Created Successfully.');
+                return Redirect::to('user/register')->withInput()->with('success', 'Group Created Successfully.');
             } else {
                 echo 'User not found<br/>';
             }
