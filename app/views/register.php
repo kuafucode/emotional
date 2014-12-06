@@ -7,8 +7,6 @@
   
   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
 	<style>
-		@import url(//fonts.googleapis.com/css?family=Lato:700);
-
 		body {
 			margin:0;
 			font-family:'Carrois Gothic', sans-serif;
@@ -86,21 +84,43 @@
         <h3>Real Time Chat</h3>
       </header>
       
-      <h4>Sign in</h4>
-      <form action="<?php echo url('user/login');?>" method="post">
+      <h4>Register</h4>
+      <form>
         <div>
           <label for="user">User</label>
           <input type="text" placeholder="Enter User Name" id="user" name="user" class="user" />
         </div>
+				
+				<div>
+          <label for="email">Email</label>
+          <input type="email" placeholder="super@cool.com" id="pwd" name="pwd" class="pwd" />
+        </div>
+				
+				<div>
+          <label for="confirmEmail">Confirm Email</label>
+          <input type="email" id="confirmEmaiil" name="confirmEmail" class="confirm-email" />
+        </div>
+				
         <div>
           <label for="password">Password</label>
-          <input type="password" placeholder="super@cool.com" id="pwd" name="pwd" class="pwd" />
+          <input type="password" placeholder="Password" id="pwd" name="pwd" class="pwd" />
         </div>
+        
+        <div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPwd" name="confirmPwd" class="confirm-pwd" />
+        </div>
+        
         <div>
           <button type="submit" class="btn">Let's Go!</button> 
         </div>
-        
+
       </form>
+
+			<div class="sign-in">
+				Already have an account? <a href="<?php echo url('user/login');?>" class="sign-in">Sign in</a>
+			</div>
+			
     </div>
   </div>
 </body>
