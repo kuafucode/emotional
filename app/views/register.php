@@ -97,8 +97,12 @@
             <h4>Register</h4>
             <form action="<?php echo url('user/register'); ?>" method="post">
                 <div>
-                    <label for="user">User</label>
-                    <input type="text" placeholder="Enter User Name" id="username" name="username" class="user"/>
+                    <label for="user">First Name</label>
+                    <input type="text" placeholder="First Name" id="firstname" name="first_name" class="user"/>
+                </div>
+                <div>
+                    <label for="user">Last Namner</label>
+                    <input type="text" placeholder="Last Name" id="lastname" name="last_name" class="user"/>
                 </div>
 
                 <div>
