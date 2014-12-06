@@ -1,10 +1,10 @@
 <?php
 
-class LoginController extends BaseController {
+class UserController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Default Login Controller
+	| Default Home Controller
 	|--------------------------------------------------------------------------
 	|
 	| You may wish to use controllers instead of, or in addition to, Closure
@@ -15,10 +15,23 @@ class LoginController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function postLogin()
 	{
-		return View::make('login');
+        //post login
 	}
 
+    public function getLogin()
+    {
+        return View::make('login');
+    }
 
+    public function getProfile()
+    {
+        // profile editor
+    }
+
+    public function postProfile()
+    {
+        //save profile
+    }
 }

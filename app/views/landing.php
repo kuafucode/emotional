@@ -73,7 +73,7 @@
         <h3>Real Time Chat</h3>
       </header>
       
-      <a href="login.php">Sign in</a> <span class="icon-login">icon</span>
+      <a href="<?php echo url('user/login');?>">Sign in</a> <span class="icon-login">icon</span>
       <p>
         <b>Don't have an account?</b>
         <a href="register.php">Create one to get started</a>
