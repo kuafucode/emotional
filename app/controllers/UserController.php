@@ -81,7 +81,6 @@ class UserController extends BaseController {
 
     public function postProfile()
     {
-        //save profile
         $user = Auth::user();
         if($password = Input::get('password')) {
             $user->password = $password;
@@ -93,6 +92,8 @@ class UserController extends BaseController {
             $user->last_name = $lastName;
         }
         $user->save();
+
+        return View::make('profile');
     }
 
     public function getRegister()
@@ -109,7 +110,7 @@ class UserController extends BaseController {
                 'email' => Input::get('email'),
                 'password' => Input::get('password'),
             );
-            $user = Sentry::register($credentials, false);
+            $user = Sentry::register($credentials, true);
 
             if ($user) {
                 return Redirect::to('register')->withInput()->with('success', 'Group Created Successfully.');

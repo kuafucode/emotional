@@ -17,3 +17,8 @@ Route::get('/', function()
 });
 
 Route::controller('user', 'UserController');
+
+Route::get('profile', function()
+{
+    return View::make('profile');
+});
