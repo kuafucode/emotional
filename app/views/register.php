@@ -95,7 +95,7 @@
         } else {
             ?>
             <h4>Register</h4>
-            <form action="<?php echo url('postRegister'); ?>" method="post">
+            <form action="<?php echo url('user/register'); ?>" method="post">
                 <div>
                     <label for="user">User</label>
                     <input type="text" placeholder="Enter User Name" id="username" name="username" class="user"/>

@@ -87,7 +87,7 @@
       </header>
       
       <h4>Sign in</h4>
-      <form action="<?php echo url('postLogin');?>" method="post">
+      <form action="<?php echo url('user/login');?>" method="post">
         <div>
           <label for="user">User</label>
           <input type="text" placeholder="Enter User Name" id="user" name="user" class="user" />
@@ -113,7 +113,7 @@
         ?>
                     <p>
                         <b>Don't have an account?</b>
-                        <a href="register.php">Create one to get started</a>
+                        <a href="<?php echo url('user/register'); ?>">Create one to get started</a>
                     </p>
         <?php
                 }
