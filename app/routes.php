@@ -13,5 +13,15 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('landing');
+});
+
+Route::get('/login', function()
+{
+    return View::make('login');
+});
+
+Route::get('/login.php', function()
+{
+    return View::make('login');
 });
