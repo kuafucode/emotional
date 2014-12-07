@@ -6,6 +6,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
     <?php echo HTML::style('css/style.css');?>
+    <?php $user = Sentry::getUser(); ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -30,6 +31,18 @@
                 uploadImage:'../upload.gif',
                 onPictureAsBase64:base64_tofield_and_image
             });
+
+            $.get("face",{},
+                function(data,status){
+                    var obj = jQuery.parseJSON( data);
+                    if (obj.positive_face != "")
+                        $('#happy-image').css("background", 'url(' + "data:image/png;base64,"+obj.positive_face + ')');
+                    if (obj.negative_face != "")
+                        $('#sad-image').css("background", 'url(' + "data:image/png;base64,"+obj.negative_face + ')');
+                    if (obj.neutral_face != "")
+                        $('#neutral-image').css("background", 'url(' + "data:image/png;base64,"+obj.neutral_face + ')');
+                });
+
         });
         function base64_toimage() {
             if(global_emotion == "happy")
@@ -213,7 +226,6 @@
                 </td>
             </tr>
         </table>
-        <?php $user = Sentry::getUser(); ?>
         <div class="usr-profile-info">
             <ul>
                 <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>

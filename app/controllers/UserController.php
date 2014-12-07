@@ -172,4 +172,28 @@ class UserController extends BaseController {
 
         return "Image saved successfully";
     }
+
+    public function getFace() {
+        $user = Sentry::getUser();
+        $positive_img = "";
+        $negative_img = "";
+        $neutral_img = "";
+        try {
+
+            if ($user->positive_face != '')
+                $positive_img = file_get_contents($user->positive_face);
+            if ($user->negative_face != '')
+                $negative_img = file_get_contents($user->negative_face);
+            if ($user->neutral_face != '')
+                $neutral_img = file_get_contents($user->neutral_face);
+
+            $result = json_encode(array("positive_face" => base64_encode($positive_img),
+                "negative_face" => base64_encode($negative_img),
+                "neutral_face" => base64_encode($neutral_img)));
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return $result;
+    }
 }
