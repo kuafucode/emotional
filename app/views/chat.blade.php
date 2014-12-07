@@ -6,6 +6,7 @@
   
   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
 	<?php echo HTML::style('css/style.css');?>
+	<?php $user = Sentry::getUser(); ?>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
 
@@ -31,12 +32,21 @@
             PUBNUB_demo.subscribe({
                 channel: 'demo_tutorial',
                 message: function(m){
-                console.log(m);
-                console.log(buddies);
-                    var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + m.message + '</div>';
+                    console.log(m);
+                    console.log(buddies);
 
-                console.log(newMessage);
-                    $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
+                    var newMessage = "";
+
+                    $.get("https://www.googleapis.com/language/translate/v2?key=AIzaSyDU6NLGZPgfZtnOrEYtmSgQsI90UBTexkU&q=" + encodeURIComponent(m.message) + "&target=<?php echo $user->languages; ?>",function(data,status){
+                        if(data.data != null) {
+                            if (data.data.translations != null) {
+                                //alert("Data: " + data.data.translations[0].translatedText + "\nStatus: " + status);
+                                var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + data.data.translations[0].translatedText + '</div>';
+                                console.log(newMessage);
+                                $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
+                            }
+                        }
+                      });
                 },
                 presence: function(m) {
                     console.log(m);
