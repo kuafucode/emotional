@@ -5,87 +5,8 @@
 	<title>Kuafu Chat: Profile</title>
   
   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
-	<style>
-		body {
-			margin:20px;
-			font-family:'Carrois Gothic', sans-serif;
-			text-align:center;
-			color: #fff;
-		}
-		
-		a, a:visited {
-			color: #fff;
-			text-decoration:none;
-		}
-    a:hover {
-      text-decoration: underline;
-    }
-
-		h1 {
-			font-size: 48px;
-			margin: 16px 0 0 0;
-      padding: 0;
-		}
-
-    h3 {
-      font-size: 18px;
-      font-weight: normal;
-      margin: 0;
-      padding: 0;
-      text-transform: lowercase;
-    }
-		
-		header a:hover {
-			text-decoration: none;
-		}
-		
-		nav {
-			display: block;
-			float: right;
-		}
-
-		#profile {
-			width: auto;
-      color: #034162;
-			text-align: left;
-		}
-		#profile a {
-			color: #034162;
-		}
-		
-		
-		.user-photo {
-			position: relative;
-			width: 100px;
-			height: 100px; 
-			background: #034162 url('data:image/png;base64,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') no-repeat 0 0;
-			border-radius: 5px;
-		}
-
-		.user-photo .take-photo {
-			position: absolute;
-			width: 100%;
-			height: 30px;
-			background: rgba(0,0,0,.7);
-			bottom: 0;
-			text-align: center;
-			line-height: 30px;
-			visibility: hidden;
-		}
-		.take-photo img {
-			width: 20px;
-			height: 15px;
-		}
-		
-		.user-photo:hover .take-photo {
-			visibility: visible;
-		}
-		
-		.take-photo img:hover {
-			transform: scale(1.2);
-		}
-
-	</style>
+	{{HTML::style('css/style.css')}}
+	
 </head>
 <body id="profile">
     <header>
