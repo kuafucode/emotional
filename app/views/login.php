@@ -1,5 +1,5 @@
 <header>
-    <a href="<?php echo url('./');?>">
+    <a href="<?php echo url('../');?>">
 			<h1>Kuafu</h1>
 			<h3>Real Time Chat</h3>
 		</a>
