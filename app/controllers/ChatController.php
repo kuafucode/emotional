@@ -3,7 +3,7 @@ class ChatController extends BaseController {
 
     public function getIndex()
     {
-        return View::make('chatroom');
+        return View::make('chat');
     }
 
 	public function postPresents()

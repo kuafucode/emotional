@@ -6,6 +6,41 @@
   
   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
 	<?php echo HTML::style('css/style.css');?>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+
+    <script type="text/javascript">
+        var PUBNUB_demo;
+
+        PUBNUB_demo = PUBNUB.init({
+            publish_key: 'pub-c-48ffb314-d672-4aa9-b14a-373932847697',
+            subscribe_key: 'sub-c-cc0b928c-7cbf-11e4-8912-02ee2ddab7fe'
+        });
+
+        PUBNUB_demo.subscribe({
+            channel: 'demo_tutorial',
+            message: function(m){$('.chat-window').append('<br />' + m.message); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);}
+        });
+
+        function sendMessage(message) {
+            PUBNUB_demo.publish({
+                channel: 'demo_tutorial',
+                message: {"message":message}
+            });
+        }
+
+        $(function(){
+
+            $('#input-message').keypress(function (e) {
+                if (e.which == 13) {
+                    sendMessage($('#input-message').val());
+                    $('#input-message').val('');
+                    return false;    //<---- Add this line
+                }
+            });
+        });
+    </script>
+
 </head>
 <body id="profile" class="chatRoom">
     <header>
@@ -38,6 +73,7 @@
           <span class="buddy-usr-handle">joeBlack63</span>
         </div>
       </div>
+            <input type="text" id="input-message" />
       
     </div>	
 	</div>
