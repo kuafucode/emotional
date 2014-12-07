@@ -299,6 +299,7 @@
             </ul>
             <div class="btn">
                 <input type="submit" value="Save"/>
+                <a href="#">Edit</a>
             </div>
         </div>
     </div>
