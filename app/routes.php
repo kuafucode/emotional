@@ -19,3 +19,5 @@ Route::get('profile', function()
 {
     return View::make('profile');
 });
+
+Route::controller('chat', 'ChatController');

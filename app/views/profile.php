@@ -61,7 +61,7 @@
 
         function capture(emotion) {
             global_emotion = emotion;
-            $('#dialog' ).dialog();
+            $('#dialog' ).dialog({width:350});
         }
     </script>
 </head>
@@ -199,12 +199,12 @@
         </div>
     </div>
 </div>
-<div id="dialog" title="Capture Image" style="width: 500px !important;height: 500px !important;" >
+<div id="dialog" title="Capture Image" style="width: 350px !important;height: 350px !important;" >
     <div style="width:330px;float:left;">
         <div id="webcam">
         </div>
         <div style="margin:5px;">
-            <img src="webcamlogo.png" style="vertical-align:text-top"/>
+            <?php echo HTML::image('scriptcam/webcamlogo.png', 'cam', array('style' => 'vertical-align:text-top'));?>
             <select id="cameraNames" size="1" onChange="changeCamera()" style="width:245px;font-size:10px;height:25px;">
             </select>
         </div>
