@@ -11,6 +11,7 @@
 
     <script type="text/javascript">
         var PUBNUB_demo;
+        var buddies = [];
 
         PUBNUB_demo = PUBNUB.init({
             publish_key: 'pub-c-48ffb314-d672-4aa9-b14a-373932847697',
@@ -21,14 +22,20 @@
         PUBNUB_demo.subscribe({
             channel: 'demo_tutorial',
             message: function(m){
-                $('.chat-window').append('<br />' + m.message); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
+            console.log(m);
+            console.log(buddies);
+                var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + m.message + '</div>';
+
+            console.log(newMessage);
+                $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
             },
             presence: function(m) {
                 console.log(m);
             },
 
             state: {
-                name: 'presence-tutorial-user',
+                name: '{{$user->fullname}}',
+                face: '{{$user->neutral_face}}',
                 timestamp: new Date()
             }
         });
@@ -37,14 +44,24 @@
             channel: 'demo_tutorial',
             state: true,
             callback: function(msg) {
-                console.log(msg);
+                if(msg.uuids) {
+                    $.each( msg.uuids, function( key, buddy ) {
+                        if(!buddies[buddy.uuid]) {
+                            buddies[buddy.uuid] = buddy.state;
+                            // this dude is new, add him to the list
+                            var name = buddy.state.name;
+                            var buddyTemplate = '<div class="chat-buddy"><img title="' + name + '" alt="' + name + '" src="' + buddy.state.face +  '"><span class="buddy-usr-handle">' + name + '</span></div>';
+                            $('.chat-buddy-list').append(buddyTemplate);
+                        }
+                    });
+                }
             }
         });
 
         function sendMessage(message) {
             PUBNUB_demo.publish({
                 channel: 'demo_tutorial',
-                message: {"message":message}
+                message: {"message":message, "uuid":'{{$user->id}}'}
             });
         }
 
@@ -78,7 +95,9 @@
 	<div id="container">
 		<div class="chatMod">
       <div class="posLeft">
-        <div class="usr"></div>
+        <div class="usr">
+        {{HTML::image($user->neutral_face)}}
+      </div>
         
 				<!--
 				<div class="usr-actions">
@@ -89,14 +108,18 @@
         </div> -->
       </div>
       <div class="chat-window">
-        <div class="chat-buddy">
-          <img title='buddy photo' alt='buddy photo' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAoCAYAAABjPNNTAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAANuSURBVHjavJlfZNtRFMebZEIoIZQSQgnhRwhhlDBGKaHsqZQx+jRGGSWEEkbYU/feGSVPnZDZjFZms6dOp7XZdBoptcl0Np1VJ1Wyc+J7+fnt9+fc3CSXr5/Eub/7ybn33HvOTWhieC1BmrF9fi/p1Ov1Am1CAwJFSHPQDVLew+4H6SNph/SU1BoHZJZUJhVJk/juC+mA9BtAl6RpUhKezcPL3I5Jj0mPSOdSSGlLkzb5ndBL0gopJezP3q6SjtD/J/rHGDJIklYiXeHlDZJl+INv22Db7GkTSJ7OOl62T7oeMHgSU6s0FbCm75IuoDuDQPKAnwBY42nxsJvCNJ7aloJdHVKFFPdZ48qr6zqQDPQBHVd8vHHTB86pr6SCz9a1DbuSBDKCddfDWvQLpAshoNIfUsZjC2LH7MFuKQjyAQyfBKy/uiag0ms3SIAk4XH+8VkvSPZOl7RLivoA5gcEVLLcIAGTx07CXo24QTZgkBNsSSaQ970gAVSF3bITsiCcZm7rhpDVAMg4Nvu28qZqW3hBWgBZNoRc9YMEVAW2CwoygbXYFJ4YS4aQCwLIGSy9On++hkwmiixF0r4bHouB/QnsOBQKveMzn56RsG2T3REO8tcQ8lJo9waznA8j7M/dcj2PljOEzAvtDvDMhJFutTQGSRhCTgrtPuNphRHyvzQGaRlCSvsrpn5ywuH0XGOQlEFkXzlnwifziaPPZhhpf0wD8kQjyJztmcasqfSuX2a0kTvqNMuWret4Me2VYLh4UuUIvLH365Uu0jSddqgJue9V0npALqLfYhgVHm/ms5qQL0Zsr8oV5uuXp/8d/MLyVseTaU1P8kx11NnNQXM2wLrUmfJtvxsMF8Ac+m3Ys6ANfDmnCdkUQpY0IWvoV7BDZhF9bzUhd4WQFSkk6qB+du6WmW+5pVIurYDEt6O5Jo8AawVAKi/Ou0GmUNGd4i7HmVQ8RKHUG4IOFbAD8JY6Af2qxXswamIJVGzF+6jEAbuGeDhD6ZAMuhyojRgq6FSal9xgRDWidtha1rkLitluMsahrheg5OpvbQyAHIyzpveTxQG2G6l4WU0P4xJVTf8qIm8YcHvqdBvWTa8zES3bbsB0b9Ua2AsDEwy7Bv33YQIbfhEplQVvZ1BoneCfh2+oaTiTf+VWzko89U+AAQARfG9qn+6fDwAAAABJRU5ErkJggg=='>
-          <span class="buddy-usr-handle">joeBlack63</span>
+        <div class="chat-buddy-list">
+            <div class="chat-buddy">
+              <img title='buddy photo' alt='buddy photo' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAoCAYAAABjPNNTAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAANuSURBVHjavJlfZNtRFMebZEIoIZQSQgnhRwhhlDBGKaHsqZQx+jRGGSWEEkbYU/feGSVPnZDZjFZms6dOp7XZdBoptcl0Np1VJ1Wyc+J7+fnt9+fc3CSXr5/Eub/7ybn33HvOTWhieC1BmrF9fi/p1Ov1Am1CAwJFSHPQDVLew+4H6SNph/SU1BoHZJZUJhVJk/juC+mA9BtAl6RpUhKezcPL3I5Jj0mPSOdSSGlLkzb5ndBL0gopJezP3q6SjtD/J/rHGDJIklYiXeHlDZJl+INv22Db7GkTSJ7OOl62T7oeMHgSU6s0FbCm75IuoDuDQPKAnwBY42nxsJvCNJ7aloJdHVKFFPdZ48qr6zqQDPQBHVd8vHHTB86pr6SCz9a1DbuSBDKCddfDWvQLpAshoNIfUsZjC2LH7MFuKQjyAQyfBKy/uiag0ms3SIAk4XH+8VkvSPZOl7RLivoA5gcEVLLcIAGTx07CXo24QTZgkBNsSSaQ970gAVSF3bITsiCcZm7rhpDVAMg4Nvu28qZqW3hBWgBZNoRc9YMEVAW2CwoygbXYFJ4YS4aQCwLIGSy9On++hkwmiixF0r4bHouB/QnsOBQKveMzn56RsG2T3REO8tcQ8lJo9waznA8j7M/dcj2PljOEzAvtDvDMhJFutTQGSRhCTgrtPuNphRHyvzQGaRlCSvsrpn5ywuH0XGOQlEFkXzlnwifziaPPZhhpf0wD8kQjyJztmcasqfSuX2a0kTvqNMuWret4Me2VYLh4UuUIvLH365Uu0jSddqgJue9V0npALqLfYhgVHm/ms5qQL0Zsr8oV5uuXp/8d/MLyVseTaU1P8kx11NnNQXM2wLrUmfJtvxsMF8Ac+m3Ys6ANfDmnCdkUQpY0IWvoV7BDZhF9bzUhd4WQFSkk6qB+du6WmW+5pVIurYDEt6O5Jo8AawVAKi/Ou0GmUNGd4i7HmVQ8RKHUG4IOFbAD8JY6Af2qxXswamIJVGzF+6jEAbuGeDhD6ZAMuhyojRgq6FSal9xgRDWidtha1rkLitluMsahrheg5OpvbQyAHIyzpveTxQG2G6l4WU0P4xJVTf8qIm8YcHvqdBvWTa8zES3bbsB0b9Ua2AsDEwy7Bv33YQIbfhEplQVvZ1BoneCfh2+oaTiTf+VWzko89U+AAQARfG9qn+6fDwAAAABJRU5ErkJggg=='>
+              <span class="buddy-usr-handle">joeBlack63</span>
+            </div>
         </div>
       </div>
-            <input type="text" id="input-message" />
       
-    </div>	
+    </div>
+
+        press enter to send
+        <input type="text" id="input-message" />
 	</div>
 </body>
 </html>
