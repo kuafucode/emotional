@@ -5,7 +5,7 @@
 	<title>Kuafu Chat: Profile</title>
   
   <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
-	{{HTML::style('css/style.css')}}
+    <?php echo HTML::style('css/style.css');?>
 	
 </head>
 <body id="profile">
