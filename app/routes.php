@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('landing');
-});
+Route::get('/', 'HomeController@landing');
 
 Route::controller('user', 'UserController');

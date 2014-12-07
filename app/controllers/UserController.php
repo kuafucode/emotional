@@ -1,6 +1,7 @@
 <?php
 
 class UserController extends BaseController {
+    protected $layout = "layouts.front";
 
 	/*
 	|--------------------------------------------------------------------------
@@ -17,9 +18,10 @@ class UserController extends BaseController {
 
 	public function postLogin()
 	{
+        $view = '';
 
         $credentials = array(
-            'email' => Input::get('user'),
+            'email' => Input::get('email'),
             'password' => Input::get('pwd'),
         );
 
@@ -32,40 +34,39 @@ class UserController extends BaseController {
                     Sentry::loginAndRemember($user);
                 else
                     Sentry::login($user);
-                return View::make('landing');
+                $view = View::make('landing');
             }
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            return View::make('login')->withErrors(array('login' => "Email required"));
+            $view = View::make('login')->withErrors(array('login' => "Email required"));
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
         {
-            return View::make('login')->withErrors(array('login' => "Password required"));
+            $view = View::make('login')->withErrors(array('login' => "Password required"));
         }
         catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
         {
-            return View::make('login')->withErrors(array('login' => "Wrong password"));
+            $view = View::make('login')->withErrors(array('login' => "Wrong password"));
         }
         catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
         {
-            return View::make('login')->withErrors(array('activation' => "User is not activated"));
+            $view = View::make('login')->withErrors(array('activation' => "User is not activated"));
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
-            return View::make('login')->withErrors(array('usernotfound' => "User not found"));
+            $view = View::make('login')->withErrors(array('usernotfound' => "User not found"));
         }
         catch(\Exception $e)
         {
-            return View::make('login')->withErrors(array('login' => $e->getMessage()));
+            $view = View::make('login')->withErrors(array('login' => $e->getMessage()));
         }
-
-
+        $this->layout->content = $view;
     }
 
     public function getLogin()
     {
-        return View::make('login');
+        $this->layout->content = View::make('login');
     }
 
     public function postLogout()
@@ -77,6 +78,8 @@ class UserController extends BaseController {
     public function getProfile()
     {
         // profile editor
+        $this->layout = null;
+        return View::make('profile');
     }
 
     public function postProfile()
@@ -97,7 +100,7 @@ class UserController extends BaseController {
 
     public function getRegister()
     {
-        return View::make('register');
+        $this->layout->content = View::make('register');
     }
 
     public function postRegister()

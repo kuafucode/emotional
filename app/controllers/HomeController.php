@@ -1,6 +1,7 @@
 <?php
 
 class HomeController extends BaseController {
+    protected $layout = "layouts.front";
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,9 +16,9 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function landing()
 	{
-		return View::make('hello');
+        $this->layout->content = View::make('landing');
 	}
 
 }
