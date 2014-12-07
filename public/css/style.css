@@ -263,11 +263,13 @@ nav a { margin-right: 5px; }
 
 #profile table {
     width: 100%;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
-#profile table tr {
+#profile table tr td {
     width: 33%;
-    background: #ccc;
     text-align: center;
 }
 
