@@ -19,45 +19,6 @@
             uuid: '{{$user->id}}'
         });
 
-        PUBNUB_demo.subscribe({
-            channel: 'demo_tutorial',
-            message: function(m){
-            console.log(m);
-            console.log(buddies);
-                var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + m.message + '</div>';
-
-            console.log(newMessage);
-                $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
-            },
-            presence: function(m) {
-                console.log(m);
-            },
-
-            state: {
-                name: '{{$user->fullname}}',
-                face: '{{$user->neutral_face}}',
-                timestamp: new Date()
-            }
-        });
-
-        PUBNUB_demo.here_now({
-            channel: 'demo_tutorial',
-            state: true,
-            callback: function(msg) {
-                if(msg.uuids) {
-                    $.each( msg.uuids, function( key, buddy ) {
-                        if(!buddies[buddy.uuid]) {
-                            buddies[buddy.uuid] = buddy.state;
-                            // this dude is new, add him to the list
-                            var name = buddy.state.name;
-                            var buddyTemplate = '<div class="chat-buddy"><img title="' + name + '" alt="' + name + '" src="' + buddy.state.face +  '"><span class="buddy-usr-handle">' + name + '</span></div>';
-                            $('.chat-buddy-list').append(buddyTemplate);
-                        }
-                    });
-                }
-            }
-        });
-
         function sendMessage(message) {
             PUBNUB_demo.publish({
                 channel: 'demo_tutorial',
@@ -66,6 +27,45 @@
         }
 
         $(function(){
+
+            PUBNUB_demo.subscribe({
+                channel: 'demo_tutorial',
+                message: function(m){
+                console.log(m);
+                console.log(buddies);
+                    var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + m.message + '</div>';
+
+                console.log(newMessage);
+                    $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
+                },
+                presence: function(m) {
+                    console.log(m);
+                },
+
+                state: {
+                    name: '{{$user->fullname}}',
+                    face: '{{$user->neutral_face}}',
+                    timestamp: new Date()
+                }
+            });
+
+            PUBNUB_demo.here_now({
+                channel: 'demo_tutorial',
+                state: true,
+                callback: function(msg) {
+                    if(msg.uuids) {
+                        $.each( msg.uuids, function( key, buddy ) {
+                            if(!buddies[buddy.uuid]) {
+                                buddies[buddy.uuid] = buddy.state;
+                                // this dude is new, add him to the list
+                                var name = buddy.state.name;
+                                var buddyTemplate = '<div class="chat-buddy"><img title="' + name + '" alt="' + name + '" src="' + buddy.state.face +  '"><span class="buddy-usr-handle">' + name + '</span></div>';
+                                $('.chat-buddy-list').append(buddyTemplate);
+                            }
+                        });
+                    }
+                }
+            });
 
             $('#input-message').keypress(function (e) {
                 if (e.which == 13) {
