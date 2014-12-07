@@ -14,12 +14,31 @@
 
         PUBNUB_demo = PUBNUB.init({
             publish_key: 'pub-c-48ffb314-d672-4aa9-b14a-373932847697',
-            subscribe_key: 'sub-c-cc0b928c-7cbf-11e4-8912-02ee2ddab7fe'
+            subscribe_key: 'sub-c-cc0b928c-7cbf-11e4-8912-02ee2ddab7fe',
+            uuid: '{{$user->id}}'
         });
 
         PUBNUB_demo.subscribe({
             channel: 'demo_tutorial',
-            message: function(m){$('.chat-window').append('<br />' + m.message); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);}
+            message: function(m){
+                $('.chat-window').append('<br />' + m.message); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
+            },
+            presence: function(m) {
+                console.log(m);
+            },
+
+            state: {
+                name: 'presence-tutorial-user',
+                timestamp: new Date()
+            }
+        });
+
+        PUBNUB_demo.here_now({
+            channel: 'demo_tutorial',
+            state: true,
+            callback: function(msg) {
+                console.log(msg);
+            }
         });
 
         function sendMessage(message) {
@@ -50,7 +69,7 @@
       </a>
     </header>
     <nav>
-      <a href="#">janeDoe63</a>
+      <a href="#">{{$user->fullname}}</a>
       <a href="<?php echo url('/');?>">home</a>
       <a href="<?php echo url('user/profile');?>" class="active">profile</a>
       <a href="<?php echo url('chat');?>">chat</a>
@@ -59,7 +78,7 @@
 	<div id="container">
 		<div class="chatMod">
       <div class="posLeft">
-        <div class="usr"><!-- user photo displayed --></div>
+        <div class="usr"></div>
         
 				<!--
 				<div class="usr-actions">
