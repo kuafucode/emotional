@@ -57,11 +57,23 @@ h3 {
     margin: 0 0 25px;
 }
 
+/* Login/Sign up */
+.mod header {
+    margin-top: 35px;
+}
+
+.mod h4 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
 .icon-login img {
     display: inline-block;
     width: 36px;
     height: 22px;
-    margin: 5px 0 -5px 5px;
+    margin: 0 0 -5px 5px;
 }
 
 .mod .register {
@@ -71,8 +83,71 @@ h3 {
     font-weight: normal;
 }
 .mod .register a {
-    /* color: #0ff5f8; hover */
     font-weight: normal;
+}
+
+form {
+    width: 80%;
+    margin-left: 15%;
+    line-height: 35px;
+    text-align: left;
+}
+
+form div {
+    margin-bottom: 5px;
+}
+
+.btn {
+    width: 90%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+form input[type="submit"] {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 30px;
+    background: #fff;
+    border: none;
+    color: #034162;
+    cursor: pointer;
+    font-size: 80%;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+label {
+    display: inline-block;
+    width: 90px;
+    font-size: 16px;
+    text-transform: lowercase;
+
+}
+
+form.signup label {
+    width: 130px;
+}
+
+input {
+    height: 25px;
+    padding-left: 5px;
+    background: #fff;
+    border: none;
+    border-radius: 3px;
+    color: #2a2a2a;
+    line-height: 25px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    color: #2a2a2a;
+}
+
+.registration.sign-in {
+    margin-top: 5px;
+    color: #ccc;
+    font-size: 12px;
 }
 
 /****   Profile page  *****/
