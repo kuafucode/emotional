@@ -32,9 +32,8 @@
             PUBNUB_demo.subscribe({
                 channel: 'demo_tutorial',
                 message: function(m){
-                console.log(m);
-                console.log(buddies);
-                    var newMessage = '<div class="msg-wrapper"><div class="chat-board-name">' + buddies[m.uuid].name + ':</div><div class="chat-board-message">' + m.message + '</div></div>';
+                    console.log(m);
+                    console.log(buddies);
 
                     var newMessage = "";
 
@@ -42,7 +41,7 @@
                         if(data.data != null) {
                             if (data.data.translations != null) {
                                 //alert("Data: " + data.data.translations[0].translatedText + "\nStatus: " + status);
-                                var newMessage = '<br /><div class="chat-board-name">' + buddies[m.uuid].name + '</div>:<div class="chat-board-message">' + data.data.translations[0].translatedText + '</div>';
+                                var newMessage = '<div class="msg-wrapper"><div class="chat-board-name">' + buddies[m.uuid].name + ':</div><div class="chat-board-message">' + data.data.translations[0].translatedText + '</div></div>';
                                 console.log(newMessage);
                                 $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
                             }
