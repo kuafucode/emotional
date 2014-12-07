@@ -225,11 +225,12 @@ nav a { margin-right: 5px; }
 }
 
 .usr-profile-info {
-    float: left;
+    text-align: left;
 }
 
 .usr-profile-info ul {
     margin: 0;
+    padding: 0;
 }
 
 .usr-profile-info ul li {
@@ -260,82 +261,102 @@ nav a { margin-right: 5px; }
     vertical-align: middle;
 }
 
+#profile table {
+    width: 100%;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#profile table tr td {
+    width: 33%;
+    text-align: center;
+}
+
+#profile table th { font-size: 20px; }
+#profile table td { padding: 10px; font-size: 14px; }
+
+#profile table .user-photo {
+    margin: auto;    
+}
+
+
 /** Chat Room **/
-    .chatMod {
-      clear: both;
-      width: 60%;
-      margin-top: 20px;
-      background: #f2f0f0;
-      border-radius: 15px;
-      padding: 15px;
-      height: 250px;
-    }
+.chatMod {
+  clear: both;
+  width: 60%;
+  margin-top: 20px;
+  background: #f2f0f0;
+  border-radius: 15px;
+  padding: 15px;
+  height: 250px;
+}
 
-    .chatMod .usr {
-			position: relative;
-			width: 130px;
-		}
+.chatMod .usr {
+  position: relative;
+  width: 130px;
+}
 
-    .chatMod .usr img {
-        border-radius: 5px;
-        width: 100%;
-    }
-    
-    .usr-actions {
-      width: 130px;
-      margin-top: 5px;
-      height: 35px;
-      background: rgba(3,65,98,1);
-      line-height: 35px;
-      text-align: center;
-    }
+.chatMod .usr img {
+    border-radius: 5px;
+    width: 100%;
+}
 
-    .usr-actions a {
-      margin: 0 1px;
-    }
-    
-    .chat-window {
-      position: relative;
-      float: right;
-      width: 80%;
-      height: inherit;
-      background: #fff;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-        overflow: scroll;
-    }
+.usr-actions {
+  width: 130px;
+  margin-top: 5px;
+  height: 35px;
+  background: rgba(3,65,98,1);
+  line-height: 35px;
+  text-align: center;
+}
 
-    .chat-buddy-list {
-      position: absolute;
-      display: block;
-      top: 10px;
-      right: 15px;
-      width: 50px;
-      height: 200px;
-      overflow: scroll;
-      text-align: center;
-    }
+.usr-actions a {
+  margin: 0 1px;
+}
 
-    .chat-buddy {
-        width: 50px;
-        height: 60px;
-    }
+.chat-window {
+  position: relative;
+  float: right;
+  width: 80%;
+  height: inherit;
+  background: #fff;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+    overflow: scroll;
+}
 
-    .chat-buddy img {
-      width: 40px;
-      height: 40px;
-    }
+.chat-buddy-list {
+  position: absolute;
+  display: block;
+  top: 10px;
+  right: 15px;
+  width: 50px;
+  height: 200px;
+  overflow: scroll;
+  text-align: center;
+}
 
-    .buddy-usr-handle {
-      display: block;
-      margin-top: 0;
-      color: #000;
-      font-size: 11px;
-    }
+.chat-buddy {
+    width: 50px;
+    height: 60px;
+}
 
-    #input-message {
-        border: 1px solid #ccc;
-    }
+.chat-buddy img {
+  width: 40px;
+  height: 40px;
+}
+
+.buddy-usr-handle {
+  display: block;
+  margin-top: 0;
+  color: #000;
+  font-size: 11px;
+}
+
+#input-message {
+    border: 1px solid #ccc;
+}
     
 .posLeft {
   float: left;
