@@ -14,6 +14,7 @@
     <script language="JavaScript" src="../scriptcam/scriptcam.js"></script>
     <script language="JavaScript">
         $(function() {
+
             $( "#dialog" ).dialog();
             $( "#dialog" ).dialog('close');
         });
@@ -37,8 +38,23 @@
                 $('#sad-image').css("background", 'url(' + "data:image/png;base64,"+$.scriptcam.getFrameAsBase64() + ')');
             else if(global_emotion == "neutral")
                 $('#neutral-image').css("background", 'url(' + "data:image/png;base64,"+$.scriptcam.getFrameAsBase64() + ')');
+
+            $.post("image",
+                {
+                    emotion: global_emotion,
+                    data: $.scriptcam.getFrameAsBase64()
+                },
+                function(data,status){
+                    alert("Data: " + data);
+                });
+
             $("#dialog" ).dialog("close");
         };
+
+        function success() {
+
+        }
+
         function base64_tofield_and_image(b64) {
             $('#formfield').val(b64);
             $('#image').attr("src","data:image/png;base64,"+b64);
@@ -61,7 +77,7 @@
 
         function capture(emotion) {
             global_emotion = emotion;
-            $('#dialog' ).dialog({width:350});
+            $('#dialog' ).dialog({width:650});
         }
     </script>
 </head>
@@ -200,7 +216,7 @@
 
         <div class="usr-profile-info">
             <ul>
-                <li>Full Name: John Doe</li>
+                <li>Full Name: </li>
                 <li>User Name: johnDoe63</li>
                 <li>Email: super@cool.com</li>
                 <li>Password: *****</li>
@@ -208,10 +224,9 @@
         </div>
     </div>
 </div>
-<div id="dialog" title="Capture Image" style="width: 350px !important;height: 350px !important;" >
-    <div style="width:330px;float:left;">
-        <div id="webcam">
-        </div>
+<div id="dialog" title="Capture Image" style="width:650px;height:500px;" >
+    <div style="width:630px;float:left;">
+        <div id="webcam"></div>
         <div style="margin:5px;">
             <?php echo HTML::image('scriptcam/webcamlogo.png', 'cam', array('style' => 'vertical-align:text-top'));?>
             <select id="cameraNames" size="1" onChange="changeCamera()" style="width:245px;font-size:10px;height:25px;">

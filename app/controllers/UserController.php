@@ -77,9 +77,17 @@ class UserController extends BaseController {
 
     public function getProfile()
     {
-        // profile editor
-        $this->layout = null;
-        return View::make('profile');
+        if (Sentry::check())
+        {
+            // profile editor
+            $this->layout = null;
+            return View::make('profile');
+        }
+        else
+        {
+            return Redirect::to('user/login');
+        }
+
     }
 
     public function postProfile()
@@ -134,5 +142,34 @@ class UserController extends BaseController {
         {
             echo 'User with this login already exists.<br/>'.$e->getMessage();
         }
+    }
+
+    public function postImage()
+    {
+        try {
+            if($user = Sentry::getUser()) {
+
+                if (Input::get('emotion') == "happy") {
+                    file_put_contents('userimages/' . $user->id . $user->username . '_happy.png', base64_decode(Input::get('data')));
+                    $user->positive_face = 'userimages/' . $user->id . $user->username . '_happy.png';
+                }
+                if (Input::get('emotion') == "sad") {
+                    file_put_contents('userimages/' . $user->id . $user->username . '_sad.png', base64_decode(Input::get('data')));
+                    $user->negative_face = 'userimages/' . $user->id . $user->username . '_sad.png';
+                }
+                if (Input::get('emotion') == "neutral") {
+                    file_put_contents('userimages/' . $user->id . $user->username . '_neutral.png', base64_decode(Input::get('data')));
+                    $user->neutral_face = 'userimages/' . $user->id . $user->username . '_neutral.png';
+                }
+
+                $user->save();
+            } else {
+                $this->layout->content = View::make('login');
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return "Image saved successfully";
     }
 }
