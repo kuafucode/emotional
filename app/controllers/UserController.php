@@ -128,6 +128,7 @@ class UserController extends BaseController {
                 'last_name' => Input::get('last_name'),
                 'email' => Input::get('email'),
                 'password' => Input::get('password'),
+                'languages' => 'en',
             );
             $user = Sentry::register($credentials, true);
 
