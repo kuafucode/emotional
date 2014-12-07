@@ -90,9 +90,9 @@
 </header>
 <nav>
     <a href="#">janeDoe63</a>
-    <a href="<?php echo url('user/landing');?>">home</a>
+    <a href="<?php echo url('/');?>">home</a>
     <a href="<?php echo url('user/profile');?>" class="active">profile</a>
-    <a href="<?php echo url('user/chat');?>">chat</a>
+    <a href="<?php echo url('chat');?>">chat</a>
     <a href="<?php echo url('user/setting');?>">setting</a>
 </nav>
 <div id="container">
@@ -213,12 +213,12 @@
                 </td>
             </tr>
         </table>
-
+        <?php $user = Sentry::getUser(); ?>
         <div class="usr-profile-info">
             <ul>
-                <li>Full Name: </li>
-                <li>User Name: johnDoe63</li>
-                <li>Email: super@cool.com</li>
+                <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>
+                <li>User Name: <?php echo $user->username; ?></li>
+                <li>Email: <?php echo $user->email; ?></li>
                 <li>Password: *****</li>
             </ul>
         </div>

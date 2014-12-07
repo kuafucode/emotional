@@ -51,9 +51,9 @@
     </header>
     <nav>
       <a href="#">janeDoe63</a>
-      <a href="<?php echo url('user/landing');?>">home</a>
+      <a href="<?php echo url('/');?>">home</a>
       <a href="<?php echo url('user/profile');?>" class="active">profile</a>
-      <a href="<?php echo url('user/chat');?>">chat</a>
+      <a href="<?php echo url('chat');?>">chat</a>
       <a href="<?php echo url('user/setting');?>">setting</a>
     </nav>
 	<div id="container">
