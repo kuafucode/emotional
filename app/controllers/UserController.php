@@ -196,4 +196,26 @@ class UserController extends BaseController {
 
         return $result;
     }
+
+    public function getSetting() {
+        if (Sentry::check())
+        {
+            // profile editor
+            $this->layout = null;
+            return View::make('setting');
+        }
+        else
+        {
+            return Redirect::to('user/login');
+        }
+    }
+
+    public function postSetting() {
+        $language = Input::get("languageselector");
+        $user = Sentry::getUser();
+        $user->languages = $language;
+        $user->save();
+
+        return View::make('setting');
+    }
 }
