@@ -6,7 +6,7 @@
 
 <?php if (Session::has('success')): ?>
     <p>
-        <b>Registeration is successfull. Click on to the activation link that sent to your email.</b>
+        <b>Registeration is successful. Click on to the activation link that sent to your email.</b>
     </p>
 <?php else: ?>
     <h4>Register</h4>
