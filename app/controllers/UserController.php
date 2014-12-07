@@ -122,7 +122,7 @@ class UserController extends BaseController {
                 'email' => Input::get('email'),
                 'password' => Input::get('password'),
             );
-            $user = Sentry::register($credentials, true);
+            $user = Sentry::register($credentials, false);
 
             if ($user) {
                 return Redirect::to('user/register')->withInput()->with('success', 'Group Created Successfully.');
