@@ -64,7 +64,6 @@
             $('#dialog' ).dialog();
         }
     </script>
-
 </head>
 <body id="profile">
 <header>
