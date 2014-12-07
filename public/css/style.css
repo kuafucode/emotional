@@ -161,14 +161,19 @@ input:-webkit-autofill {
   color: #034162;
 }
 
+#profile header {float: left; }
+#profile header h1 { margin: 0; }
+
 header a:hover {
     text-decoration: none;
 }
 
 nav {
-    display: block;
     float: right;
+    margin-top: 49px;
 }
+
+nav a { margin-right: 5px; }
 
 
 .user-photo {
@@ -196,6 +201,34 @@ nav {
   vertical-align: middle;
 }
 
+#profile .usr-actions {
+    display: block;
+    float: left;
+    width: 15%;
+    margin-top: 5px;
+    height: 35px;
+    background: rgba(3,65,98,1);
+    line-height: 35px;
+    text-align: center;
+}
+
+#container .profile {
+    clear: both;
+}
+
+.usr-profile-info {
+    float: left;
+}
+
+.usr-profile-info ul {
+    margin: 0;
+}
+
+.usr-profile-info ul li {
+    list-style-type: none;
+    line-height: 25px;
+}
+
 .user-photo:hover .take-photo {
   visibility: visible;
 }
@@ -204,10 +237,19 @@ nav {
   transform: scale(1.2);
 }
 
+.undo img,
+.delete img,
 .emoticon {
   width: 20px;
   height: 20px;
   vertical-align: text-top;
+}
+
+.emoticon {
+    vertical-align: text-top;
+}
+.undo img, .delete img {
+    vertical-align: middle;
 }
 
 /** Chat Room **/
