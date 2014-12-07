@@ -34,7 +34,14 @@ class UserController extends BaseController {
                     Sentry::loginAndRemember($user);
                 else
                     Sentry::login($user);
-                $view = View::make('landing');
+
+                if ($user->positive_face == null &&
+                    $user->negative_face == null &&
+                    $user->neutral_face == null) {
+                    return Redirect::to('user/profile');
+                } else {
+                    return Redirect::to('chat');
+                }
             }
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)

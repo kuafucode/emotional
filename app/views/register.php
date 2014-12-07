@@ -7,7 +7,7 @@
 
 <?php if (Session::has('success')): ?>
     <p class="registration-success">
-        Registeration is successful. Click on to the activation link that sent to your email.
+        Registeration is successful. <a href="login">You can sign in now!</a>
     </p>
 <?php else: ?>
     <h4>Register</h4>
