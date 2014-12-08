@@ -13,11 +13,34 @@
             <a href="<?php echo url('user/register'); ?>">Create one</a> to get started
         </p>
     <?php else: ?>
-        <p>
-            <b>Welcome</b>
-        <form action="<?php echo url('user/logout'); ?>" method="post">
-            <input type="submit" value="Logout">
-        </form>
+        <p class="about">
+					<a href="<?php echo url('user/profile');?>" class="active">profile</a>
+					<a href="<?php echo url('chat');?>">chat</a>
+					
+					<b>Welcome</b><br />
+					The Kuafu real time chat application provides a creative/interactive
+					solution individuals to reflect their moods in the chat environment,
+					instead of setting a profile image should you choose.
+					Everyone in your buddy list will see a happy or sad face each time you
+					send out a message.  Our application supports automatic translation
+					so you can communicate globally, which you can change or update on your
+					profile page.
+					
+					<div style="display: none">
+						The Kuafu real time chat application provides a creative/interactive
+					solution individuals to reflect their moods in the chat environment,
+					without selecting emoticons.
+					instead of setting a profile image should you choose.
+					Everyone in your buddy list will see a happy or sad face each time you
+					send out a message.  Our application supports automatic translation
+					so you can communicate globally, which you can change or update on your
+					profile page.
+					</div>
+					
+					
+					<form action="<?php echo url('user/logout'); ?>" method="post">
+							<input type="submit" value="Logout">
+					</form>
         </p>
     <?php endif;?>
 </div>
