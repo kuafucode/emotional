@@ -99,19 +99,38 @@ class UserController extends BaseController {
 
     public function postProfile()
     {
-        $user = Auth::user();
-        if($password = Input::get('password')) {
-            $user->password = $password;
-        }
-        if($firstName = Input::get('first_name')) {
-            $user->first_name = $firstName;
-        }
-        if($lastName = Input::get('last_name')) {
-            $user->last_name = $lastName;
-        }
-        $user->save();
+        $oldUser = Sentry::getUser();
+        $user = Sentry::getUser();
 
-        return View::make('profile');
+        $nameArray = explode(" ", Input::get('fullname'));
+        $firstname = "";
+        $lastname = "";
+        for ($i=0; $i < count($nameArray) - 1; $i++ ) {
+            $firstname .= $nameArray[$i];
+        }
+        if(count($nameArray) > 1) {
+            $lastname = $nameArray[count($nameArray)-1];
+        }
+        $user->first_name = $firstname;
+        $user->last_name = $lastname;
+        $user->username = Input::get('username');
+        if(Input::get('password') != null)
+            $user->password = Input::get('password');
+        $user->email = Input::get('email');
+        $user->languages = Input::get('languageselector');
+
+        try {
+            $user->save();
+            return View::make('profile');
+        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+        {
+            return View::make('profile')->withErrors(array('loginRequired' => "Email required"));
+        }
+        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            return View::make('profile')->withErrors(array('passwordRequired' => "Password required"));
+        }
+
     }
 
     public function getRegister()

@@ -388,3 +388,10 @@ small {
 .posLeft {
   float: left;
 }
+
+.error {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-style: italic !important;
+    color: red !important;
+}

@@ -6,7 +6,11 @@
 
     <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css' />
     <?php echo HTML::style('css/style.css');?>
-    <?php $user = Sentry::getUser(); ?>
+    <?php
+        $user = Sentry::getUser();
+        $user = User::find($user->id);
+    ?>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -32,7 +36,8 @@
                 onPictureAsBase64:base64_tofield_and_image
             });
 
-            $("#languageselector").val('<?php echo $user->languages;?>')
+            $("#languageselector").val('<?php echo $user->languages;?>');
+            $("#languagelabel").text($("#languageselector option[value='<?php echo $user->languages;?>']").text());
 
             $.get("face",{},
                 function(data,status){
@@ -94,9 +99,16 @@
             global_emotion = emotion;
             $('#dialog' ).dialog({width:650});
         }
+
+        function edit() {
+            $("#profile-info").css("display","none");
+            $("#profile-edit").css("display","block");
+        }
+
     </script>
 </head>
 <body id="profile">
+
 <header>
     <a href="<?php echo url('../');?>">
         <h1>Kuafu</h1>
@@ -104,7 +116,7 @@
     </a>
 </header>
 <nav>
-    <a href="#">janeDoe63</a>
+    <a href="#"><?php echo $user->first_name . ' ' . $user->last_name; ?></a>
     <a href="<?php echo url('/');?>">home</a>
     <a href="<?php echo url('user/profile');?>" class="active">profile</a>
     <a href="<?php echo url('chat');?>">chat</a>
@@ -112,12 +124,36 @@
 <div id="container">
     <div class="profile">
         <h2>Account Information</h2>
-        <div class="usr-profile-info">
+        <div class="usr-profile-info" id="profile-info" style="display: block;">
             <ul>
                 <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>
                 <li>User Name: <?php echo $user->username; ?></li>
                 <li>Email: <?php echo $user->email; ?></li>
                 <li>Password: *****</li>
+                <li>Language: <label id="languagelabel"/></li>
+
+            </ul>
+            <div class="error">
+                <?php
+                    if ($errors->has('loginRequired')) {
+                        echo "email info is required<br/><br/>";
+                    }
+                ?>
+            </div>
+            <div class="btn">
+                <a href="#" onclick="edit();">Edit</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="usr-profile-info" id="profile-edit" style="display: none;">
+        <form action="profile" method="post">
+            <ul>
+                <li>Full Name: <input type="text" name="fullname" value="<?php echo $user->first_name . ' ' . $user->last_name; ?>"/></li>
+                <li>User Name: <input type="text" name="username" value="<?php echo $user->username; ?>"/></li>
+                <li>Email: <input type="text" name="email" value="<?php echo $user->email; ?>"/></li>
+                <li>Password: <input type="text" name="password" value=""/></li>
+                <!--<li>Confirm Password: <input type="text" name="confirmpassword" value=""/></li>-->
                 <li>Language: <select id="languageselector" name="languageselector">
                         <option selected="selected">Select a Language</option>
                         <option value='af'>Afrikaans</option>
@@ -135,6 +171,7 @@
                         <option value='cs'>Czech</option>
                         <option value='da'>Danish</option>
                         <option value='nl'>Dutch</option>
+                        <option value='en'>English</option>
                         <option value='et'>Estonian</option>
                         <option value='tl'>Filipino</option>
                         <option value='fi'>Finnish</option>
@@ -182,11 +219,11 @@
 
             </ul>
             <div class="btn">
-                <input type="submit" value="Save"/>
-                <a href="#">Edit</a>
+                <input type="submit" onclick="save();" value="Save"/>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
         
         <p>Before proceeding to the real time emotional chatroom, please take three
