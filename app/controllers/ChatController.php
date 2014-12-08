@@ -30,20 +30,50 @@ class ChatController extends BaseController {
 
     public function getPredict()
     {
-        $client = new Google_Client();
-        $client->setApplicationName("Kuafu_Hackathon");
-        $client->setDeveloperKey("AIzaSyCQJ4e5YNUJOeXZFZQKHOPMq9_jQmR_lys");
+        $message = Input::get('message');
+        $md5Key = 's-' . md5($message);
+        if(!Cache::has($md5Key)) {
+            //set POST variables
+            $url = 'https://community-sentiment.p.mashape.com/text/';
+            $fields = array(
+                'txt' => urlencode('this is good'),
+            );
 
-        $client->setAuthConfig('{"web":{"auth_uri":"https://accounts.google.com/o/oauth2/auth","client_secret":"PH9qz7NUZVbYa7vjBEnx20qs","token_uri":"https://accounts.google.com/o/oauth2/token","client_email":"844271735773-3mmlqth0qe6jsma8t2bfjiih65c7ku4f@developer.gserviceaccount.com","client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/844271735773-3mmlqth0qe6jsma8t2bfjiih65c7ku4f@developer.gserviceaccount.com","client_id":"844271735773-3mmlqth0qe6jsma8t2bfjiih65c7ku4f.apps.googleusercontent.com","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs"}}');
+            //url-ify the data for the POST
+            $fields_string = '';
+            foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+            rtrim($fields_string, '&');
 
-        $service = new Google_Service_Prediction($client);
-        $input = new Google_Service_Prediction_Input();
-        $inputinput = new Google_Service_Prediction_InputInput();
-        $inputinput->setCsvInstance('test');
-        $input->setInput($inputinput);
-        $output = $service->hostedmodels->predict('projects/414649711441', 'sample.sentiment', $input);
 
-        var_dump($output);exit();
+            $ch = curl_init();
 
+            curl_setopt($ch,CURLOPT_URL, $url);
+            curl_setopt($ch,CURLOPT_POST, count($fields));
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch,CURLOPT_POSTFIELDS, 'txt=' . Input::get('message'));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'X-Mashape-Key: TKWkwvdWc2mshkVxXSYfRxbu2j1Ep1GnfLqjsnNP2jlznLAXLZ',
+                'Content-Type: application/x-www-form-urlencoded'
+            ));
+
+            $result = curl_exec($ch);
+            $result = str_replace("\n", '', $result);
+            $result = json_decode($result);
+            $sentiment = 0;
+            if($result->result->sentiment == 'Positive') {
+                $sentiment = 1;
+            }
+            if($result->result->sentiment == 'Negative') {
+                $sentiment = -1;
+            }
+            Cache::put('s-' . md5(Input::get('message')) , $sentiment, 10);
+        }
+
+        $sentiment = 0;
+        if(Cache::has($md5Key)) {
+            $sentiment = Cache::get($md5Key);
+        }
+        return Response::json( array('result' => $sentiment) );
     }
 }

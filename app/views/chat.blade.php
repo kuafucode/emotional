@@ -17,6 +17,10 @@
         var PUBNUB_demo;
         var buddies = [];
 
+        var neutralFace = '{{asset($user->neutral_face)}}';
+        var positiveFace = '{{asset($user->positive_face)}}';
+        var negativeFace = '{{asset($user->negative_face)}}';
+
         $( document ).tooltip();
 
         PUBNUB_demo = PUBNUB.init({
@@ -102,6 +106,26 @@
 
             $('#input-message').keypress(function (e) {
                 if (e.which == 13) {
+                    //get sentiment data
+                    $.ajax({
+                        url: '{{Url('chat/predict')}}',
+                        type: 'GET',
+                        data: {'message' : $('#input-message').val()},
+                        success: function(data) {
+                        console.log(data);
+                        alert(data.result);
+                            if(data.result == 0) {
+                                $('#user_face').attr('src', neutralFace);
+                            }
+                            else if(data.result < 0) {
+                                $('#user_face').attr('src', negativeFace);
+                            }
+                            else {
+                                $('#user_face').attr('src', positiveFace);
+                            }
+                        },
+                        error: function(err) { alert(err); }
+                    });
                     sendMessage({
                         message: $('#input-message').val(),
                         languages: '<?php echo $user->languages;?>'
@@ -137,7 +161,7 @@
 		<div class="chatMod">
       <div class="posLeft">
         <div class="usr">
-					{{HTML::image($user->neutral_face)}}
+					{{HTML::image($user->neutral_face, '', array('id' => 'user_face'))}}
 				</div>
       </div>
       <div class="chat-window">
