@@ -112,8 +112,8 @@ h3 {
 }
 
 .mod .register {
-    margin-top: 25px;
-    color: #ccc;
+    margin-top: 50px;
+    color: #444;
     font-size: 14px;
     font-weight: normal;
 }
@@ -181,7 +181,7 @@ input:-webkit-autofill {
 
 .registration.sign-in {
     margin-top: 5px;
-    color: #ccc;
+    color: #444;
     font-size: 12px;
 }
 
@@ -350,8 +350,7 @@ nav a { margin-right: 5px; }
   transform: scale(1.2);
 }
 
-.undo img,
-.delete img,
+img.delete ,
 .emoticon {
   width: 20px;
   height: 20px;
