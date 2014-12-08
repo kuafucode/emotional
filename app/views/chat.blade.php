@@ -9,10 +9,15 @@
 	<?php $user = Sentry::getUser(); ?>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
     <script type="text/javascript">
         var PUBNUB_demo;
         var buddies = [];
+
+        $( document ).tooltip();
 
         PUBNUB_demo = PUBNUB.init({
             publish_key: 'pub-c-48ffb314-d672-4aa9-b14a-373932847697',
@@ -36,9 +41,10 @@
                     console.log(buddies);
 
                     var newMessage = "";
+                    $( document ).tooltip();
 
                     if(m.message.languages == '<?php echo $user->languages;?>') {
-                        var newMessage = '<div class="msg-wrapper"><div class="chat-board-name">' +
+                        var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-name">' +
                                             buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
                                             m.message.message + '</div></div>';
                         console.log(newMessage);
@@ -49,7 +55,7 @@
                             if(data.data != null) {
                                 if (data.data.translations != null) {
                                     //alert("Data: " + data.data.translations[0].translatedText + "\nStatus: " + status);
-                                    var newMessage = '<div class="msg-wrapper"><div class="chat-board-name">' + buddies[m.uuid].name + ':</div><div class="chat-board-message">' + data.data.translations[0].translatedText + '</div></div>';
+                                    var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-name">' + buddies[m.uuid].name + ':</div><div class="chat-board-message">' + data.data.translations[0].translatedText + '</div></div>';
                                     console.log(newMessage);
                                     $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
                                 }
