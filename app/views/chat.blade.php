@@ -100,8 +100,14 @@
       <a href="<?php echo url('/');?>">home</a>
       <a href="<?php echo url('user/profile');?>" class="active">profile</a>
       <a href="<?php echo url('chat');?>">chat</a>
+			<div class="logout">
+        <form action="http://localhost/emotional/public/user/logout" method="post">
+            <input type="submit" value="Log Out">
+        </form>
+			</div>
     </nav>
-	<div id="container">
+	<div id="container" class="clearBoth">
+		<h2>Welcome to the Chat Room</h2>
 		<div class="chatMod">
       <div class="posLeft">
         <div class="usr">

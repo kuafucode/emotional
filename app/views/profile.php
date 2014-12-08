@@ -108,6 +108,93 @@
     </script>
 </head>
 <body id="profile">
+<header>
+    <a href="<?php echo url('../');?>">
+        <h1>Kuafu</h1>
+        <h3>Real Time Chat</h3>
+    </a>
+</header>
+<nav>
+    <div class="username"><span>You are logged in as:</span><br />user name</div>
+    <a href="<?php echo url('/');?>">home</a>
+    <a href="<?php echo url('user/profile');?>" class="active">profile</a>
+    <a href="<?php echo url('chat');?>">chat</a>
+    <div class="logout">
+        <form action="http://localhost/emotional/public/user/logout" method="post">
+            <input type="submit" value="Log Out">
+        </form>
+    </div>
+</nav>
+<div id="container">
+    <div class="profile">
+        <h2>Account Information</h2>
+        <div class="usr-profile-info">
+            <ul>
+                <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>
+                <li>User Name: <?php echo $user->username; ?></li>
+                <li>Email: <?php echo $user->email; ?></li>
+                <li>Password: *****</li>
+                <li>Language: <select id="languageselector" name="languageselector">
+                        <option>Select a Language</option>
+                        <option value='af'>Afrikaans</option>
+                        <option value='sq'>Albanian</option>
+                        <option value='ar'>Arabic</option>
+                        <option value='hy'>Armenian</option>
+                        <option value='az'>Azerbaijani</option>
+                        <option value='eu'>Basque</option>
+                        <option value='be'>Belarusian</option>
+                        <option value='bg'>Bulgarian</option>
+                        <option value='ca'>Catalan</option>
+                        <option value='zh-CN'>Chinese (Simplified)</option>
+                        <option value='zh-TW'>Chinese (Traditional)</option>
+                        <option value='hr'>Croatian</option>
+                        <option value='cs'>Czech</option>
+                        <option value='da'>Danish</option>
+                        <option value='nl'>Dutch</option>
+                        <option value='et'>Estonian</option>
+                        <option value='tl'>Filipino</option>
+                        <option value='fi'>Finnish</option>
+                        <option value='fr'>French</option>
+                        <option value='gl'>Galician</option>
+                        <option value='ka'>Georgian</option>
+                        <option value='de'>German</option>
+                        <option value='el'>Greek</option>
+                        <option value='ht'>Haitian Creole</option>
+                        <option value='iw'>Hebrew</option>
+                        <option value='hi'>Hindi</option>
+                        <option value='hu'>Hungarian</option>
+                        <option value='is'>Icelandic</option>
+                        <option value='id'>Indonesian</option>
+                        <option value='ga'>Irish</option>
+                        <option value='it'>Italian</option>
+                        <option value='ja'>Japanese</option>
+                        <option value='ko'>Korean</option>
+                        <option value='la'>Latin</option>
+                        <option value='lv'>Latvian</option>
+                        <option value='lt'>Lithuanian</option>
+                        <option value='mk'>Macedonian</option>
+                        <option value='ms'>Malay</option>
+                        <option value='mt'>Maltese</option>
+                        <option value='no'>Norwegian</option>
+                        <option value='fa'>Persian</option>
+                        <option value='pl'>Polish</option>
+                        <option value='pt'>Portuguese</option>
+                        <option value='ro'>Romanian</option>
+                        <option value='ru'>Russian</option>
+                        <option value='sr'>Serbian</option>
+                        <option value='sk'>Slovak</option>
+                        <option value='sl'>Slovenian</option>
+                        <option value='es'>Spanish</option>
+                        <option value='sw'>Swahili</option>
+                        <option value='sv'>Swedish</option>
+                        <option value='th'>Thai</option>
+                        <option value='tr'>Turkish</option>
+                        <option value='uk'>Ukrainian</option>
+                        <option value='ur'>Urdu</option>
+                        <option value='vi'>Vietnamese</option>
+                        <option value='cy'>Welsh</option>
+                        <option value='yi'>Yiddish</option>
+                    </select></li>
 
     <header>
         <a href="<?php echo url('../');?>">
@@ -225,9 +312,10 @@
         </div>
 
         
-        <p class="notice">Before proceeding to the real time emotional chatroom, please take three
-        photographs using the table presented below.  It will make your chatting
-        experience more interesting.
+        <p class="notice">Before proceeding to the chatroom, please take three
+        photographs using the table presented below.  Start by hovering over the default blue images;
+        a camera icon will appear on hover and you can proceed to taking your photograph. It will make
+        your chatting experience more interesting.
         </p>
 
 
@@ -286,6 +374,8 @@
                 </td>
             </tr>
         </table>
+        
+        <div class="go-chat"> All done? Proceed to the <a href="<?php echo url('chat');?>">Chat Room</a></div>
 
         <div id="dialog" title="Capture Image" style="width:650px;height:500px;" >
             <div style="width:630px;float:left;">
