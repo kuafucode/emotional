@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'emotional',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => 'kuafu',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
