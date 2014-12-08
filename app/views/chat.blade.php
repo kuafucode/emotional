@@ -51,9 +51,10 @@
                     $( document ).tooltip();
 
                     if(m.message.languages == '<?php echo $user->languages;?>') {
-                        var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-face ' + messageId + '"><img style="height: 40px;" src="' +
-                                            m.face + '"/>:</div><div class="chat-board-name"> '+
-                                            buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
+                        var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '">'+
+																					'<div class="chat-board-name"> '+ buddies[m.uuid].name +
+																					'</div><div class="chat-board-face ' + messageId + '"><img style="height: 40px;" src="' +
+                                            m.face + '"/></div>' + '<div class="chat-board-message"><div class="arrow-left"></div>' +
                                             m.message.message + '</div></div>';
                         console.log(newMessage);
                         $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
@@ -66,9 +67,9 @@
                                         if (data.data.translations != null) {
                                             //alert("Data: " + data.data.translations[0].translatedText + "\nStatus: " + status);
                                             var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '">' +
+																						'<div class="chat-board-name"> '+ buddies[m.uuid].name + '</div>' +
                                                                 '<div class="chat-board-face"><img style="height: 40px;" src="' +
-                                                                 buddies[m.uuid].face + '"/>:</div><div class="chat-board-name"> '+
-                                                                 buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
+                                                                 buddies[m.uuid].face + '"/></div>'+'<div class="chat-board-message"><div class="arrow-left"></div>' +
                                                                  data.data.translations[0].translatedText + '</div></div>';
 																						
                                             console.log(newMessage);
