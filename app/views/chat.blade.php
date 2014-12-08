@@ -111,10 +111,11 @@
             $('#input-message').keypress(function (e) {
                 if (e.which == 13) {
                     //get sentiment data
+                    var current_message = $('#input-message').val();
                     $.ajax({
                         url: '{{Url('chat/predict')}}',
                         type: 'GET',
-                        data: { 'uuid' : '{{$user->id}}', 'message' : $('#input-message').val(), 'cnt' : msgCnt},
+                        data: { 'uuid' : '{{$user->id}}', 'message' : current_message, 'cnt' : msgCnt},
                         success: function(data) {
                         console.log(data);
                         var face = neutralFace;
@@ -132,7 +133,7 @@
                             }
 
                             sendMessage({
-                                message: $('#input-message').val(),
+                                message: current_message,
                                 languages: '<?php echo $user->languages;?>'
                             }, face);
                         },
