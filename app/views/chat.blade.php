@@ -96,11 +96,10 @@
       </a>
     </header>
     <nav>
-      <a href="#">{{$user->fullname}}</a>
+      <div class="username"><span>You are logged in as:</span><br />{{$user->fullname}}</div>
       <a href="<?php echo url('/');?>">home</a>
       <a href="<?php echo url('user/profile');?>" class="active">profile</a>
       <a href="<?php echo url('chat');?>">chat</a>
-      <a href="<?php echo url('user/setting');?>">setting</a>
     </nav>
 	<div id="container">
 		<div class="chatMod">
