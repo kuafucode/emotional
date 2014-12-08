@@ -96,15 +96,15 @@
       </a>
     </header>
     <nav>
-      <div class="username"><span>You are logged in as:</span><br />{{$user->fullname}}</div>
-      <a href="<?php echo url('/');?>">home</a>
-      <a href="<?php echo url('user/profile');?>" class="active">profile</a>
-      <a href="<?php echo url('chat');?>">chat</a>
-			<div class="logout">
-        <form action="http://localhost/emotional/public/user/logout" method="post">
-            <input type="submit" value="Log Out">
-        </form>
-			</div>
+        <div class="username"><span>You are logged in as:</span><br />{{$user->fullname}}</div>
+        <a href="<?php echo url('/');?>">home</a>
+        <a href="<?php echo url('user/profile');?>" class="active">profile</a>
+        <a href="<?php echo url('chat');?>">chat</a>
+        <div class="logout">
+            <form action="<?php echo url('user/logout'); ?>" method="post">
+                <input type="submit" value="Logout">
+            </form>
+        </div>
     </nav>
 	<div id="container" class="clearBoth">
 		<h2>Welcome to the Chat Room</h2>

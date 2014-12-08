@@ -119,6 +119,11 @@
         <a href="<?php echo url('/');?>">home</a>
         <a href="<?php echo url('user/profile');?>" class="active">profile</a>
         <a href="<?php echo url('chat');?>">chat</a>
+        <div class="logout">
+            <form action="<?php echo url('user/logout'); ?>" method="post">
+                <input type="submit" value="Logout">
+            </form>
+        </div>
     </nav>
     <div id="container">
         <div class="profile">
