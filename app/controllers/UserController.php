@@ -198,6 +198,46 @@ class UserController extends BaseController {
         return "Image saved successfully";
     }
 
+    public function postRemoveimage() {
+        try {
+            if($user = Sentry::getUser()) {
+
+                if (Input::get('emotion') == "happy") {
+                    if(file_exists('userimages/' . $user->id . $user->username . '_happy.png')) {
+                        $fh = fopen('userimages/' . $user->id . $user->username . '_happy.png', 'a');
+                        fclose($fh);
+                        unlink('userimages/' . $user->id . $user->username . '_happy.png');
+                    }
+                    $user->positive_face = '';
+                }
+                if (Input::get('emotion') == "sad") {
+                    if(file_exists('userimages/' . $user->id . $user->username . '_sad.png')) {
+                        $fh = fopen('userimages/' . $user->id . $user->username . '_sad.png', 'a');
+                        fclose($fh);
+                        unlink('userimages/' . $user->id . $user->username . '_sad.png');
+                    }
+                    $user->negative_face = '';
+                }
+                if (Input::get('emotion') == "neutral") {
+                    if(file_exists('userimages/' . $user->id . $user->username . '_neutral.png')) {
+                        $fh = fopen('userimages/' . $user->id . $user->username . '_neutral.png', 'a');
+                        fclose($fh);
+                        unlink('userimages/' . $user->id . $user->username . '_neutral.png');
+                    }
+                    $user->neutral_face = '';
+                }
+
+                $user->save();
+            } else {
+                $this->layout->content = View::make('login');
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return "Image removed successfully";
+    }
+
     public function getFace() {
         $user = Sentry::getUser();
         $positive_img = "";

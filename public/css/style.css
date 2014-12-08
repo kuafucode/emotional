@@ -355,6 +355,7 @@ img.delete ,
   width: 20px;
   height: 20px;
   vertical-align: text-top;
+    cursor: hand;
 }
 
 .emoticon {
@@ -511,7 +512,7 @@ small {
   float: left;
 }
 
-.clearBoth {clear: both;}}
+.clearBoth {clear: both;}
 
 .error {
     margin-top: 30px;
