@@ -29,6 +29,8 @@ h3 {
     text-transform: lowercase;
 }
 
+/** Home **/
+
 #container .mod {
     margin: 50px auto auto;
     background: #40404a; /* Old browsers */
@@ -60,7 +62,37 @@ h3 {
     margin: 0 0 25px;
 }
 
+.about {
+    width: 70%;
+    margin-top: -15px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 20px;
+}
+
+.about .nav {
+    float: right;
+}
+.about .nav form { display:inline-block; width: auto; margin-left: 0; }
+.about .nav form input {
+    display:inline-block;
+    width: auto;
+    height: auto;
+    margin-left: 0;
+    background: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.about .nav form input:hover {text-decoration:underline;}
+
 /* Login/Sign up */
+
 .mod header {
     margin-top: 35px;
 }
