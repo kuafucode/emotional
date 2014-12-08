@@ -32,7 +32,7 @@ class ChatController extends BaseController {
     {
         $message = Input::get('message');
         $md5Key = 's-' . md5($message);
-        if(!Cache::has($md5Key)) {
+        if(1 || !Cache::has($md5Key)) {
             //set POST variables
             $url = 'https://community-sentiment.p.mashape.com/text/';
             $fields = array(
@@ -60,6 +60,7 @@ class ChatController extends BaseController {
             $result = curl_exec($ch);
             $result = str_replace("\n", '', $result);
             $result = json_decode($result);
+            $user = Sentry::findUserById(Input::get('uuid'));
             $sentiment = 0;
             if($result->result->sentiment == 'Positive') {
                 $sentiment = 1;
@@ -68,6 +69,7 @@ class ChatController extends BaseController {
                 $sentiment = -1;
             }
             Cache::put('s-' . md5(Input::get('message')) , $sentiment, 10);
+
         }
 
         $sentiment = 0;
