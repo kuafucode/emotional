@@ -183,6 +183,13 @@ nav {
 
 nav a { margin-right: 5px; }
 
+.username {
+    display: inline-block;
+    color: #034162;
+    font-size: 14px;
+}
+
+.username span { color: #ccc; font-size: 11px; font-weight: normal; }
 
 .user-photo {
   position: relative;
@@ -225,6 +232,7 @@ nav a { margin-right: 5px; }
 }
 
 .usr-profile-info {
+    margin-bottom: 40px;
     text-align: left;
 }
 
@@ -236,6 +244,28 @@ nav a { margin-right: 5px; }
 .usr-profile-info ul li {
     list-style-type: none;
     line-height: 25px;
+}
+
+.usr-profile-info .btn {
+    width: auto;
+    text-align: left;
+}
+
+.usr-profile-info .btn input[type="submit"] {
+    background: #034162;
+    width: 80px;
+    height: 35px;
+    margin-right: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.usr-profile-info .btn a {font-size: 14px;}
+
+.usr-profile-info .btn input[type="submit"]:hover {
+    background: #fff;
+    border: 2px solid #034162;
+    color: #034162 !important;
 }
 
 .user-photo:hover .take-photo {
@@ -261,9 +291,16 @@ nav a { margin-right: 5px; }
     vertical-align: middle;
 }
 
+.notice {
+    width: 80%;
+    margin: 80px 0 15px;
+    padding-bottom: 0;
+}
+
 #profile table {
-    width: 100%;
-    margin-top: 30px;
+    width: 80%;
+    margin: 0;
+    padding: 15px 0;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
@@ -349,11 +386,13 @@ nav a { margin-right: 5px; }
 .chat-board-message { display: block; width: 85%; margin-left: 5px; }
 
 .chat-buddy-list {
-    position: absolute;
+    position: static;
+    float: right;
     display: block;
     top: 10px;
     right: 0;
     width: 80px;
+    padding-top: 3px;
     height: inherit;
     overflow-y: auto;
     text-align: center;

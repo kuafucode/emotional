@@ -96,11 +96,10 @@
       </a>
     </header>
     <nav>
-      <a href="#">{{$user->fullname}}</a>
+      <div class="username"><span>You are logged in as:</span><br />{{$user->fullname}}</div>
       <a href="<?php echo url('/');?>">home</a>
       <a href="<?php echo url('user/profile');?>" class="active">profile</a>
       <a href="<?php echo url('chat');?>">chat</a>
-      <a href="<?php echo url('user/setting');?>">setting</a>
     </nav>
 	<div id="container">
 		<div class="chatMod">
@@ -122,66 +121,5 @@
 			<input type="text" id="input-message" />
 		</div>
 	</div>
-
-
-    <script type="text/javascript">
-
-      var clientId = '837050751313';
-
-      var apiKey = '844271735773-3mmlqth0qe6jsma8t2bfjiih65c7ku4f.apps.googleusercontent.com';
-
-      var scopes = 'https://www.googleapis.com/auth/prediction';
-
-      function handleClientLoad() {
-        // Step 2: Reference the API key
-        gapi.client.setApiKey(apiKey);
-        window.setTimeout(checkAuth,1);
-      }
-
-      function checkAuth() {
-        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
-      }
-
-      function handleAuthResult(authResult) {
-        var authorizeButton = document.getElementById('authorize-button');
-        if (authResult && !authResult.error) {
-          authorizeButton.style.visibility = 'hidden';
-          makeApiCall();
-        } else {
-          authorizeButton.style.visibility = '';
-          authorizeButton.onclick = handleAuthClick;
-        }
-      }
-
-      function handleAuthClick(event) {
-        // Step 3: get authorization to use private data
-        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
-        return false;
-      }
-
-      // Load the API and make an API call.  Display the results on the screen.
-      function makeApiCall() {
-        // Step 4: Load the Google+ API
-        gapi.client.load('predict', 'v1.6').then(function() {
-          // Step 5: Assemble the API request
-          var request = gapi.client.plus.people.get({
-            'userId': 'me'
-          });
-          // Step 6: Execute the API request
-          request.then(function(resp) {
-            var heading = document.createElement('h4');
-            var image = document.createElement('img');
-            image.src = resp.result.image.url;
-            heading.appendChild(image);
-            heading.appendChild(document.createTextNode(resp.result.displayName));
-
-            document.getElementById('content').appendChild(heading);
-          }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
-          });
-        });
-      }
-    </script>
-    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 </body>
 </html>

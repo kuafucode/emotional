@@ -116,7 +116,7 @@
     </a>
 </header>
 <nav>
-    <a href="#"><?php echo $user->first_name . ' ' . $user->last_name; ?></a>
+    <div class="username"><span>You are logged in as:</span><br /><?php echo $user->first_name . ' ' . $user->last_name; ?></div>
     <a href="<?php echo url('/');?>">home</a>
     <a href="<?php echo url('user/profile');?>" class="active">profile</a>
     <a href="<?php echo url('chat');?>">chat</a>
@@ -155,7 +155,7 @@
                 <li>Password: <input type="text" name="password" value=""/></li>
                 <!--<li>Confirm Password: <input type="text" name="confirmpassword" value=""/></li>-->
                 <li>Language: <select id="languageselector" name="languageselector">
-                        <option selected="selected">Select a Language</option>
+                        <option>Select a Language</option>
                         <option value='af'>Afrikaans</option>
                         <option value='sq'>Albanian</option>
                         <option value='ar'>Arabic</option>
@@ -226,7 +226,7 @@
 </div>
 
         
-        <p>Before proceeding to the real time emotional chatroom, please take three
+        <p class="notice">Before proceeding to the real time emotional chatroom, please take three
         photographs using the table presented below.  It will make your chatting
         experience more interesting.
         </p>
