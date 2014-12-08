@@ -33,20 +33,20 @@
             <input type="email" placeholder="super@cool.com" id="email" name="email" class="email"/>
         </div>
 
-        <div>
+        <!--<div>
             <label for="confirmEmail">Confirm Email</label>
             <input type="email" id="confirmEmail" name="confirmEmail" class="confirm-email"/>
-        </div>
+        </div>-->
 
         <div>
             <label for="password">Password</label>
             <input type="password" placeholder="Password" id="password" name="password" class="pwd"/>
         </div>
 
-        <div>
+        <!--<div>
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" class="confirm-pwd"/>
-        </div>
+        </div>-->
 
         <div class="btn">
             <input type="submit" value="Let's Go!" />

@@ -238,6 +238,21 @@ nav a { margin-right: 5px; }
     color: #fff;
 }
 
+.logout input[type="button"] {
+    width: 80px;
+    background: #fff;
+    color: #034162;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.logout input[type="button"]:hover {
+    background:#034162;
+    border: none;
+    color: #fff;
+}
+
 .username {
     display: inline-block;
     color: #034162;
