@@ -30,4 +30,12 @@ class SentryUser extends SentryUserModel  {
         }
         return $this->attributes['neutral_face'];
     }
+
+    public function getLanguagesAttribute()
+    {
+        if(!$this->attributes['languages']) {
+            return 'en';
+        }
+        return $this->attributes['languages'];
+    }
 }
