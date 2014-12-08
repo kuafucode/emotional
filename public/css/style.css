@@ -52,7 +52,7 @@ h3 {
 
 .mod .inner-wrapper {
     position: relative;
-    top: 50%;
+    top: 35%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -64,7 +64,7 @@ h3 {
 
 .about {
     width: 70%;
-    margin-top: -15px;
+    margin-top: 30px;
     margin-right: auto;
     margin-left: auto;
     font-size: 14px;
@@ -73,9 +73,8 @@ h3 {
     line-height: 20px;
 }
 
-.about .nav {
-    float: right;
-}
+.about .nav {float: right; color: #cfcfcf;}
+
 .about .nav form { display:inline-block; width: auto; margin-left: 0; }
 .about .nav form input {
     display:inline-block;
@@ -83,12 +82,13 @@ h3 {
     height: auto;
     margin-left: 0;
     background: none;
-    color: #fff;
+    color: #000; /* #034176 */
     font-size: 14px;
     font-weight: 400;
     text-transform: none;
 }
 
+.about .nav a,.about .nav form input {color: #000; font-stretch: normal; font-weight: normal;}
 .about .nav form input:hover {text-decoration:underline;}
 
 /* Login/Sign up */

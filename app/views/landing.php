@@ -14,23 +14,24 @@
         </p>
     <?php else: ?>
         <div class="about">
+
+					<h4 class="posLeft">Welcome</h4>
 					<div class="nav">
-						<a href="<?php echo url('user/profile');?>" class="active">profile</a>
-						<a href="<?php echo url('chat');?>">chat</a>
+						<a href="<?php echo url('user/profile');?>" class="active">profile</a> |
+						<a href="<?php echo url('chat');?>">chat</a> |
 						<form action="<?php echo url('user/logout'); ?>" method="post">
 							<input type="submit" value="logout">
 						</form>
 					</div>
-					
-					<h4>Welcome</h4>
-					<p>The Kuafu real time chat application provides a creative/interactive
+
+					<p class="clearBoth">The Kuafu real time chat application provides a creative/interactive
 					solution for individuals to reflect their moods in the chat environment,
 					instead of setting a profile image should you choose.
 					Everyone in your buddy list will see a happy or unhappy face each time you
-					send out a message.<br/> Our application supports automatic translation
+					send out a message.</p><p>Our application supports automatic translation
 					so you can communicate globally, which you can change or update on your
 					profile page.</p>
-					
+
 					<div style="display: none">
 						The Kuafu real time chat application provides a creative/interactive
 						solution individuals to reflect their moods in the chat environment,
