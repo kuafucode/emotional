@@ -14,6 +14,7 @@
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
     <script type="text/javascript">
+        var msgCnt = 0;
         var PUBNUB_demo;
         var buddies = [];
 
@@ -29,10 +30,10 @@
             uuid: '{{$user->id}}'
         });
 
-        function sendMessage(message) {
+        function sendMessage(message,face) {
             PUBNUB_demo.publish({
                 channel: 'demo_tutorial',
-                message: {"message":message, "uuid":'{{$user->id}}'}
+                message: {"message":message, "uuid":'{{$user->id}}', "cnt" : msgCnt, "face" : face}
             });
         }
 
@@ -44,12 +45,14 @@
                     console.log(m);
                     console.log(buddies);
 
+                    var messageId = 'message' + m.uuid + '-' + m.cnt;
+
                     var newMessage = "";
                     $( document ).tooltip();
 
                     if(m.message.languages == '<?php echo $user->languages;?>') {
-                        var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-face"><img style="height: 40px;" src="' +
-                                            buddies[m.uuid].face + '"/>:</div><div class="chat-board-name"> '+
+                        var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-face ' + messageId + '"><img style="height: 40px;" src="' +
+                                            m.face + '"/>:</div><div class="chat-board-name"> '+
                                             buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
                                             m.message.message + '</div></div>';
                         console.log(newMessage);
@@ -74,6 +77,7 @@
                                     }
                                  });
                     }
+                    msgCnt++;
                 },
                 presence: function(m) {
                     console.log(m);
@@ -110,25 +114,29 @@
                     $.ajax({
                         url: '{{Url('chat/predict')}}',
                         type: 'GET',
-                        data: {'message' : $('#input-message').val()},
+                        data: { 'uuid' : '{{$user->id}}', 'message' : $('#input-message').val(), 'cnt' : msgCnt},
                         success: function(data) {
                         console.log(data);
-                        alert(data.result);
+                        var face = neutralFace;
                             if(data.result == 0) {
+                                face = neutralFace;
                                 $('#user_face').attr('src', neutralFace);
                             }
                             else if(data.result < 0) {
+                                face = negativeFace;
                                 $('#user_face').attr('src', negativeFace);
                             }
                             else {
+                                face = positiveFace;
                                 $('#user_face').attr('src', positiveFace);
                             }
+
+                            sendMessage({
+                                message: $('#input-message').val(),
+                                languages: '<?php echo $user->languages;?>'
+                            }, face);
                         },
                         error: function(err) { alert(err); }
-                    });
-                    sendMessage({
-                        message: $('#input-message').val(),
-                        languages: '<?php echo $user->languages;?>'
                     });
                     $('#input-message').val('');
                     return false;    //<---- Add this line
