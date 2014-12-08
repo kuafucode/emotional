@@ -108,6 +108,11 @@
     <a href="<?php echo url('/');?>">home</a>
     <a href="<?php echo url('user/profile');?>" class="active">profile</a>
     <a href="<?php echo url('chat');?>">chat</a>
+    <div class="logout">
+        <form action="http://localhost/emotional/public/user/logout" method="post">
+            <input type="submit" value="Log Out">
+        </form>
+    </div>
 </nav>
 <div id="container">
     <div class="profile">
@@ -189,9 +194,10 @@
     </div>
 
         
-        <p class="notice">Before proceeding to the real time emotional chatroom, please take three
-        photographs using the table presented below.  It will make your chatting
-        experience more interesting.
+        <p class="notice">Before proceeding to the chatroom, please take three
+        photographs using the table presented below.  Start by hovering over the default blue images;
+        a camera icon will appear on hover and you can proceed to taking your photograph. It will make
+        your chatting experience more interesting.
         </p>
         
         
@@ -250,6 +256,8 @@
                 </td>
             </tr>
         </table>
+        
+        <div class="go-chat"> All done? Proceed to the <a href="<?php echo url('chat');?>">Chat Room</a></div>
 
         <div id="dialog" title="Capture Image" style="width:650px;height:500px;" >
             <div style="width:630px;float:left;">

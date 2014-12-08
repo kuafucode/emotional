@@ -19,6 +19,8 @@ h1 {
     padding: 0;
 }
 
+h2 { font-size: 25px; padding-top: 20px;}
+
 h3 {
     font-size: 18px;
     font-weight: normal;
@@ -30,14 +32,15 @@ h3 {
 #container .mod {
     margin: 50px auto auto;
     background: #40404a; /* Old browsers */
-    background: -moz-linear-gradient(top,  #40404a 0%, #68686b 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#40404a), color-stop(100%,#68686b)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #40404a 0%,#68686b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #40404a 0%,#68686b 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #40404a 0%,#68686b 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #40404a 0%,#68686b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40404a', endColorstr='#68686b',GradientType=0 ); /* IE6-9 */
+    background: -moz-linear-gradient(top,  #5476d1 0%, #68aef9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5476d1), color-stop(100%,#68aef9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #5476d1 0%,#68aef9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #5476d1 0%,#68aef9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #5476d1 0%,#68aef9 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #5476d1 0%,#68aef9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5476d1', endColorstr='#68aef9',GradientType=0 ); /* IE6-9 */
     border-radius: 50%;
+    box-shadow: 0 1px 5px 1px #484848;
     color: #fff;
     width: 500px;
     height: 500px;
@@ -183,6 +186,26 @@ nav {
 
 nav a { margin-right: 5px; }
 
+.logout {
+    display: inline-block;
+}
+
+.logout form {margin: 0; padding: 0; }
+.logout input[type="submit"] {
+    width: 80px;    
+    background: #fff;
+    color: #034162;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.logout input[type="submit"]:hover {    
+    background:#034162;
+    border: none;
+    color: #fff;
+}
+
 .username {
     display: inline-block;
     color: #034162;
@@ -317,6 +340,14 @@ nav a { margin-right: 5px; }
     margin: auto;    
 }
 
+.go-chat {
+    width: 80%;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+
 
 /** Chat Room **/
 .chatMod {
@@ -423,7 +454,11 @@ nav a { margin-right: 5px; }
 small {
     color: #999;
 }
-    
+
+
+/* Misc */
 .posLeft {
   float: left;
 }
+
+.clearBoth {clear: both;}
