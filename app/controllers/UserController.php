@@ -146,27 +146,34 @@ class UserController extends BaseController {
                 'first_name' => Input::get('first_name'),
                 'last_name' => Input::get('last_name'),
                 'email' => Input::get('email'),
+                'password' => Input::get('password'),
             );
             $user = Sentry::register($credentials, true);
 
             if ($user) {
-                return Redirect::to('user/register')->withInput()->with('success', 'Group Created Successfully.');
+                return Redirect::to('user/register')->withInput()->with('success', 'User Created Successfully.');
             } else {
-                echo 'User not found<br/>';
+                return Redirect::to('user/register')->withInput()->with('fail', 'Registration failed.');
             }
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            echo 'Login field is required.<br/>'.$e->getMessage();
-        }
-        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
-        {
-            echo 'Password field is required.<br/>'.$e->getMessage();
+            $view = View::make('register')->withErrors(array('register' => "Email required"));
         }
         catch (Cartalyst\Sentry\Users\UserExistsException $e)
         {
-            echo 'User with this login already exists.<br/>'.$e->getMessage();
+            $view = View::make('register')->withErrors(array('register' => "User exists"));
         }
+        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            $view = View::make('register')->withErrors(array('register' => "Password required"));
+        }
+        catch(\Exception $e)
+        {
+            $view = View::make('register')->withErrors(array('register' => $e->getMessage()));
+        }
+        $this->layout->content = $view;
+
     }
 
     public function postImage()

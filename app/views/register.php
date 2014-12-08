@@ -10,6 +10,13 @@
         Registeration is successful. <a href="login">You can sign in now!</a>
     </p>
 <?php else: ?>
+
+    <?php
+    if ($errors) {
+        echo $errors->first('register');
+    }
+    ?>
+
     <h4>Register</h4>
     <form action="<?php echo url('user/register'); ?>" method="post" class="signup">
         <div>
