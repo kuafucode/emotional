@@ -70,6 +70,7 @@
                                                                  buddies[m.uuid].face + '"/>:</div><div class="chat-board-name"> '+
                                                                  buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
                                                                  data.data.translations[0].translatedText + '</div></div>';
+																						
                                             console.log(newMessage);
                                             $('.chat-window').append(newMessage);
                                             $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
