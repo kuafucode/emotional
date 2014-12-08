@@ -46,7 +46,7 @@
                     if(m.message.languages == '<?php echo $user->languages;?>') {
                         var newMessage = '<div class="msg-wrapper" title="' + m.message.message + '"><div class="chat-board-face"><img style="height: 40px;" src="' +
                                             buddies[m.uuid].face + '"/>:</div><div class="chat-board-name"> '+
-                                            buddies[m.uuid].face + ':</div><div class="chat-board-message">' +
+                                            buddies[m.uuid].name + ':</div><div class="chat-board-message">' +
                                             m.message.message + '</div></div>';
                         console.log(newMessage);
                         $('.chat-window').append(newMessage); $('.chat-window').scrollTop($('.chat-window:first')[0].scrollHeight);
