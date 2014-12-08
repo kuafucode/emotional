@@ -109,129 +109,128 @@
 </head>
 <body id="profile">
 
-<header>
-    <a href="<?php echo url('../');?>">
-        <h1>Kuafu</h1>
-        <h3>Real Time Chat</h3>
-    </a>
-</header>
-<nav>
-    <div class="username"><span>You are logged in as:</span><br /><?php echo $user->first_name . ' ' . $user->last_name; ?></div>
-    <a href="<?php echo url('/');?>">home</a>
-    <a href="<?php echo url('user/profile');?>" class="active">profile</a>
-    <a href="<?php echo url('chat');?>">chat</a>
-</nav>
-<div id="container">
-    <div class="profile">
-        <h2>Account Information</h2>
-        <div class="usr-profile-info" id="profile-info" style="display: block;">
-            <ul>
-                <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>
-                <li>User Name: <?php echo $user->username; ?></li>
-                <li>Email: <?php echo $user->email; ?></li>
-                <li>Password: *****</li>
-                <li>Language: <label id="languagelabel"/></li>
+    <header>
+        <a href="<?php echo url('../');?>">
+            <h1>Kuafu</h1>
+            <h3>Real Time Chat</h3>
+        </a>
+    </header>
+    <nav>
+        <div class="username"><span>You are logged in as:</span><br /><?php echo $user->first_name . ' ' . $user->last_name; ?></div>
+        <a href="<?php echo url('/');?>">home</a>
+        <a href="<?php echo url('user/profile');?>" class="active">profile</a>
+        <a href="<?php echo url('chat');?>">chat</a>
+    </nav>
+    <div id="container">
+        <div class="profile">
+            <h2>Account Information</h2>
+            <div class="usr-profile-info" id="profile-info" style="display: block;">
+                <ul>
+                    <li>Full Name: <?php echo $user->first_name . ' ' . $user->last_name; ?></li>
+                    <li>User Name: <?php echo $user->username; ?></li>
+                    <li>Email: <?php echo $user->email; ?></li>
+                    <li>Password: *****</li>
+                    <li>Language: <label id="languagelabel"/></li>
 
-            </ul>
-            <div class="error">
-                <?php
-                    if ($errors->has('loginRequired')) {
-                        echo "email info is required<br/><br/>";
-                    }
-                ?>
+                </ul>
+                <div class="error">
+                    <?php
+                        if ($errors->has('loginRequired')) {
+                            echo "email info is required<br/><br/>";
+                        }
+                    ?>
+                </div>
+                <div class="btn">
+                    <input type="button" onclick="edit();" value="Edit"/>
+                </div>
             </div>
-            <div class="btn">
-                <a href="#" onclick="edit();">Edit</a>
+
+            <div class="usr-profile-info" id="profile-edit" style="display: none;">
+                <form action="profile" method="post">
+                    <ul>
+                        <li>Full Name: <input type="text" name="fullname" value="<?php echo $user->first_name . ' ' . $user->last_name; ?>"/></li>
+                        <li>User Name: <input type="text" name="username" value="<?php echo $user->username; ?>"/></li>
+                        <li>Email: <input type="text" name="email" value="<?php echo $user->email; ?>"/></li>
+                        <li>Password: <input type="text" name="password" value=""/></li>
+                        <!--<li>Confirm Password: <input type="text" name="confirmpassword" value=""/></li>-->
+                        <li>Language: <select id="languageselector" name="languageselector">
+                                <option>Select a Language</option>
+                                <option value='af'>Afrikaans</option>
+                                <option value='sq'>Albanian</option>
+                                <option value='ar'>Arabic</option>
+                                <option value='hy'>Armenian</option>
+                                <option value='az'>Azerbaijani</option>
+                                <option value='eu'>Basque</option>
+                                <option value='be'>Belarusian</option>
+                                <option value='bg'>Bulgarian</option>
+                                <option value='ca'>Catalan</option>
+                                <option value='zh-CN'>Chinese (Simplified)</option>
+                                <option value='zh-TW'>Chinese (Traditional)</option>
+                                <option value='hr'>Croatian</option>
+                                <option value='cs'>Czech</option>
+                                <option value='da'>Danish</option>
+                                <option value='nl'>Dutch</option>
+                                <option value='en'>English</option>
+                                <option value='et'>Estonian</option>
+                                <option value='tl'>Filipino</option>
+                                <option value='fi'>Finnish</option>
+                                <option value='fr'>French</option>
+                                <option value='gl'>Galician</option>
+                                <option value='ka'>Georgian</option>
+                                <option value='de'>German</option>
+                                <option value='el'>Greek</option>
+                                <option value='ht'>Haitian Creole</option>
+                                <option value='iw'>Hebrew</option>
+                                <option value='hi'>Hindi</option>
+                                <option value='hu'>Hungarian</option>
+                                <option value='is'>Icelandic</option>
+                                <option value='id'>Indonesian</option>
+                                <option value='ga'>Irish</option>
+                                <option value='it'>Italian</option>
+                                <option value='ja'>Japanese</option>
+                                <option value='ko'>Korean</option>
+                                <option value='la'>Latin</option>
+                                <option value='lv'>Latvian</option>
+                                <option value='lt'>Lithuanian</option>
+                                <option value='mk'>Macedonian</option>
+                                <option value='ms'>Malay</option>
+                                <option value='mt'>Maltese</option>
+                                <option value='no'>Norwegian</option>
+                                <option value='fa'>Persian</option>
+                                <option value='pl'>Polish</option>
+                                <option value='pt'>Portuguese</option>
+                                <option value='ro'>Romanian</option>
+                                <option value='ru'>Russian</option>
+                                <option value='sr'>Serbian</option>
+                                <option value='sk'>Slovak</option>
+                                <option value='sl'>Slovenian</option>
+                                <option value='es'>Spanish</option>
+                                <option value='sw'>Swahili</option>
+                                <option value='sv'>Swedish</option>
+                                <option value='th'>Thai</option>
+                                <option value='tr'>Turkish</option>
+                                <option value='uk'>Ukrainian</option>
+                                <option value='ur'>Urdu</option>
+                                <option value='vi'>Vietnamese</option>
+                                <option value='cy'>Welsh</option>
+                                <option value='yi'>Yiddish</option>
+                            </select></li>
+
+                    </ul>
+                    <div class="btn">
+                        <input type="submit" onclick="save();" value="Save"/>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-
-    <div class="usr-profile-info" id="profile-edit" style="display: none;">
-        <form action="profile" method="post">
-            <ul>
-                <li>Full Name: <input type="text" name="fullname" value="<?php echo $user->first_name . ' ' . $user->last_name; ?>"/></li>
-                <li>User Name: <input type="text" name="username" value="<?php echo $user->username; ?>"/></li>
-                <li>Email: <input type="text" name="email" value="<?php echo $user->email; ?>"/></li>
-                <li>Password: <input type="text" name="password" value=""/></li>
-                <!--<li>Confirm Password: <input type="text" name="confirmpassword" value=""/></li>-->
-                <li>Language: <select id="languageselector" name="languageselector">
-                        <option>Select a Language</option>
-                        <option value='af'>Afrikaans</option>
-                        <option value='sq'>Albanian</option>
-                        <option value='ar'>Arabic</option>
-                        <option value='hy'>Armenian</option>
-                        <option value='az'>Azerbaijani</option>
-                        <option value='eu'>Basque</option>
-                        <option value='be'>Belarusian</option>
-                        <option value='bg'>Bulgarian</option>
-                        <option value='ca'>Catalan</option>
-                        <option value='zh-CN'>Chinese (Simplified)</option>
-                        <option value='zh-TW'>Chinese (Traditional)</option>
-                        <option value='hr'>Croatian</option>
-                        <option value='cs'>Czech</option>
-                        <option value='da'>Danish</option>
-                        <option value='nl'>Dutch</option>
-                        <option value='en'>English</option>
-                        <option value='et'>Estonian</option>
-                        <option value='tl'>Filipino</option>
-                        <option value='fi'>Finnish</option>
-                        <option value='fr'>French</option>
-                        <option value='gl'>Galician</option>
-                        <option value='ka'>Georgian</option>
-                        <option value='de'>German</option>
-                        <option value='el'>Greek</option>
-                        <option value='ht'>Haitian Creole</option>
-                        <option value='iw'>Hebrew</option>
-                        <option value='hi'>Hindi</option>
-                        <option value='hu'>Hungarian</option>
-                        <option value='is'>Icelandic</option>
-                        <option value='id'>Indonesian</option>
-                        <option value='ga'>Irish</option>
-                        <option value='it'>Italian</option>
-                        <option value='ja'>Japanese</option>
-                        <option value='ko'>Korean</option>
-                        <option value='la'>Latin</option>
-                        <option value='lv'>Latvian</option>
-                        <option value='lt'>Lithuanian</option>
-                        <option value='mk'>Macedonian</option>
-                        <option value='ms'>Malay</option>
-                        <option value='mt'>Maltese</option>
-                        <option value='no'>Norwegian</option>
-                        <option value='fa'>Persian</option>
-                        <option value='pl'>Polish</option>
-                        <option value='pt'>Portuguese</option>
-                        <option value='ro'>Romanian</option>
-                        <option value='ru'>Russian</option>
-                        <option value='sr'>Serbian</option>
-                        <option value='sk'>Slovak</option>
-                        <option value='sl'>Slovenian</option>
-                        <option value='es'>Spanish</option>
-                        <option value='sw'>Swahili</option>
-                        <option value='sv'>Swedish</option>
-                        <option value='th'>Thai</option>
-                        <option value='tr'>Turkish</option>
-                        <option value='uk'>Ukrainian</option>
-                        <option value='ur'>Urdu</option>
-                        <option value='vi'>Vietnamese</option>
-                        <option value='cy'>Welsh</option>
-                        <option value='yi'>Yiddish</option>
-                    </select></li>
-
-            </ul>
-            <div class="btn">
-                <input type="submit" onclick="save();" value="Save"/>
-            </div>
-        </form>
-    </div>
-</div>
 
         
         <p class="notice">Before proceeding to the real time emotional chatroom, please take three
         photographs using the table presented below.  It will make your chatting
         experience more interesting.
         </p>
-        
-        
+
+
         <table>
             <tr>
                 <th colspan="3" align="center">Expressions</th>
@@ -270,7 +269,7 @@
                 <td>Well, make a face like "Who cares?!"</td>
             </tr>
             <tr>
-                <td>                    
+                <td>
                     <label for="happy-yellowicon">
                         <img width='128' height='128' title='happy' alt='happy' src='data:image/png;base64,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'>
                     </label>
