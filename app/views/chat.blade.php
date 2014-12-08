@@ -37,28 +37,6 @@
             });
         }
 
-        setInterval(function () {
-            PUBNUB_demo.here_now({
-                channel: 'demo_tutorial',
-                state: true,
-                callback: function(msg) {
-                    if(msg.uuids) {
-                        buddies = [];
-                        $('.chat-buddy-list').empty();
-                        $.each( msg.uuids, function( key, buddy ) {
-                            if(!buddies[buddy.uuid]) {
-                                buddies[buddy.uuid] = buddy.state;
-                                // this dude is new, add him to the list
-                                var name = buddy.state.name;
-                                var buddyTemplate = '<div class="chat-buddy"><img title="' + name + '" alt="' + name + '" src="' + buddy.state.face +  '"><span class="buddy-usr-handle">' + name + '</span></div>';
-                                $('.chat-buddy-list').append(buddyTemplate);
-                            }
-                        });
-                    }
-                }
-            });
-        }, 5000);
-
         $(function(){
 
             PUBNUB_demo.subscribe({
